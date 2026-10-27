@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¡Tu lugar está reservado! · Masterclass</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1a0b2e" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/masterclass/masterclass.css" />
+</head>
+<body>
+  <div class="aura" aria-hidden="true">
+    <span class="orb orb--1"></span>
+    <span class="orb orb--2"></span>
+    <span class="orb orb--3"></span>
+  </div>
+
+  <header class="nav">
+    <a href="/" class="nav__logo">Laura Restrepo</a>
+  </header>
+
+  <main class="thanks">
+    <div class="container container--narrow center">
+      <p class="badge reveal">✦ Inscripción confirmada</p>
+      <h1 class="reveal">Tu lugar está<br /><em>reservado</em></h1>
+      <p class="lead center reveal">
+        Nos vemos el domingo 15 de noviembre en la masterclass
+        <strong>Monetiza tus dones espirituales</strong>. Haz estos dos pasos para no perdértela:
+      </p>
+
+      <ol class="thanks__steps">
+        <li class="step reveal">
+          <span class="step__num">01</span>
+          <h3>Únete al grupo de WhatsApp</h3>
+          <p>Ahí compartiremos el enlace de acceso y los recordatorios.</p>
+          <!-- TODO: link del grupo de WhatsApp (en masterclass.js → WHATSAPP_GROUP_URL) -->
+          <a href="#" class="btn" data-whatsapp>Unirme al grupo</a>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">02</span>
+          <h3>Agéndala en tu calendario</h3>
+          <p>Así te llega un recordatorio antes de empezar.</p>
+          <a href="#" class="btn btn--ghost" data-calendar target="_blank" rel="noopener">Agregar a Google Calendar</a>
+        </li>
+      </ol>
+
+      <p class="reveal">Revisa también tu correo (y la carpeta de spam o promociones).</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__quote">Dios te dio el regalo, te toca a ti monetizarlo.</p>
+    <p>
+      <a href="https://www.instagram.com/laurarestrepocastilla/" target="_blank" rel="noopener">@laurarestrepocastilla</a>
+      · © <span id="year"></span> Laura Restrepo
+    </p>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/masterclass/masterclass.js"></script>
+</body>
+</html>

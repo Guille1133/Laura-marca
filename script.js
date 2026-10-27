@@ -19,7 +19,7 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // Calendly: solo se carga cuando hay link configurado
-if (CALENDLY_URL) {
+if (CALENDLY_URL && document.getElementById("calendly")) {
   const script = document.createElement("script");
   script.src = "https://assets.calendly.com/assets/external/widget.js";
   script.async = true;
