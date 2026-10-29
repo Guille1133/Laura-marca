@@ -26,11 +26,12 @@ assets/                  → fotos de Laura
 ## Landing: pendientes
 
 - [ ] Link de Calendly en `script.js` (`CALENDLY_URL`)
-- [ ] Foto principal en `assets/laura.jpg` (vertical, 4:5)
-- [ ] Foto secundaria en `assets/laura-about.jpg` (cuadrada)
+- [x] Foto principal en `assets/laura.jpg` (vertical, 4:5)
+- [x] Foto secundaria en `assets/laura-about.jpg` (cuadrada)
 - [ ] Testimonios reales
-- [ ] Historia de Laura en la sección "Sobre mí"
-- [ ] Confirmar duración de la llamada y si es gratuita (FAQ)
+- [x] Historia de Laura en la sección "Sobre mí"
+- [x] Llamada: gratuita, 30 minutos
+- [ ] Dominio
 
 ## Ver en local
 
