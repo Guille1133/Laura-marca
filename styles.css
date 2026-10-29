@@ -261,6 +261,7 @@ h1 em, h2 em {
   line-height: 1.4;
 }
 .testimonial figcaption { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.05em; }
+.testimonial figcaption strong { font-weight: 500; }
 
 #agenda h2, #agenda .eyebrow { text-align: center; }
 .booking {

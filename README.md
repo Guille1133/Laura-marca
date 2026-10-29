@@ -28,7 +28,7 @@ assets/                  → fotos de Laura
 - [ ] Link de Calendly en `script.js` (`CALENDLY_URL`)
 - [x] Foto principal en `assets/laura.jpg` (vertical, 4:5)
 - [x] Foto secundaria en `assets/laura-about.jpg` (cuadrada)
-- [ ] Testimonios reales
+- [x] Testimonios reales (capturas originales en `Testimonios/`, fuera de git)
 - [x] Historia de Laura en la sección "Sobre mí"
 - [x] Llamada: gratuita, 30 minutos
 - [ ] Dominio
