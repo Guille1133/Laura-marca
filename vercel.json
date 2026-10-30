@@ -1,3 +1,11 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.azulnavegante.com" }],
+      "destination": "https://azulnavegante.com/:path*",
+      "permanent": true
+    }
+  ]
 }

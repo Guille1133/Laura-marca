@@ -43,4 +43,4 @@ npx serve .
 
 ## Deploy
 
-Sitio estático: se importa el repo en Vercel sin configuración adicional y se conecta el dominio en *Settings → Domains*.
+Vercel publica cada push a `main` en https://azulnavegante.com (DNS en GoDaddy: `A @ 76.76.21.21` y `CNAME www cname.vercel-dns.com`; `www` redirige al dominio raíz).
