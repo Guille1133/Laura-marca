@@ -36,8 +36,8 @@ if (form) {
     msg.textContent = "";
 
     const data = Object.fromEntries(new FormData(form));
-    if (!data.name.trim() || !form.email.checkValidity() ||data.phone.replace(/\D/g, "").length < 7) {
-      msg.textContent = "Revisa tu nombre, correo y WhatsApp.";
+    if (!data.name.trim() || data.phone.replace(/\D/g, "").length < 7) {
+      msg.textContent = "Revisa tu nombre y tu WhatsApp.";
       return;
     }
 
@@ -77,7 +77,7 @@ if (calendar) {
     action: "TEMPLATE",
     text: "Masterclass: Monetiza tus dones espirituales · Laura Restrepo",
     dates: `${fmt(MASTERCLASS_START)}/${fmt(end)}`,
-    details: "Masterclass en vivo con Laura Restrepo. El enlace de acceso llegará a tu correo y WhatsApp.",
+    details: "Masterclass en vivo con Laura Restrepo. El enlace de acceso llegará por el grupo de WhatsApp.",
   });
   calendar.href = `https://calendar.google.com/calendar/render?${params}`;
 }
