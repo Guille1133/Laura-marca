@@ -1,7 +1,7 @@
 // TODO: confirmar hora y zona horaria (-05:00 = Colombia)
 const MASTERCLASS_START = new Date("2026-11-15T19:00:00-05:00");
 const MASTERCLASS_DURATION_MIN = 90;
-// Grupo de WhatsApp: al inscribirse, la persona va directo aquí
+// Grupo de WhatsApp (botón en la página de gracias)
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HB2Q6lFJp5Y2kCvXkfGQo2";
 
 // Cuenta regresiva
@@ -50,7 +50,7 @@ if (form) {
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error(await res.text());
-      window.location.href = WHATSAPP_GROUP_URL || "/masterclass/gracias";
+      window.location.href = "/masterclass/gracias";
     } catch {
       msg.textContent = "No pudimos registrarte. Inténtalo de nuevo en un momento.";
       button.disabled = false;

@@ -20,7 +20,7 @@ assets/                  → fotos de Laura
 ## Masterclass: pendientes
 
 - [ ] Confirmar hora y zona horaria (`masterclass/index.html` y `MASTERCLASS_START` en `masterclass.js`)
-- [x] Grupo de WhatsApp: al inscribirse redirige directo (`WHATSAPP_GROUP_URL` en `masterclass.js`)
+- [x] Grupo de WhatsApp en la página de gracias (`WHATSAPP_GROUP_URL` en `masterclass.js`)
 
 ## Inscritos
 
