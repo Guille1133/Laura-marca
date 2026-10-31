@@ -13,7 +13,8 @@ script.js                → animaciones al hacer scroll + Calendly
 masterclass/index.html   → página de captura de la masterclass (/masterclass)
 masterclass/gracias.html → página de gracias (/masterclass/gracias)
 masterclass/masterclass.js → fecha, cuenta regresiva, formulario, WhatsApp
-api/registro.js          → guarda los inscritos en MailerLite
+api/registro.js          → envía los inscritos a Google Sheets
+google-sheets/registro.gs → script que se pega en la hoja (Apps Script)
 assets/                  → fotos de Laura
 ```
 
@@ -21,7 +22,18 @@ assets/                  → fotos de Laura
 
 - [ ] Confirmar hora y zona horaria (`masterclass/index.html` y `MASTERCLASS_START` en `masterclass.js`)
 - [ ] Link del grupo de WhatsApp (`WHATSAPP_GROUP_URL` en `masterclass.js`)
-- [ ] En Vercel → Settings → Environment Variables: `MAILERLITE_API_KEY` y `MAILERLITE_GROUP_ID`
+- [ ] Conectar la hoja de inscritos (ver abajo)
+
+## Inscritos en Google Sheets
+
+1. Crea una hoja de Google Sheets vacía (por ejemplo "Inscritos masterclass").
+2. Extensiones → Apps Script → borra lo que haya y pega `google-sheets/registro.gs`.
+   Cambia `SECRET` por una clave larga y guarda.
+3. Implementar → Nueva implementación → tipo "Aplicación web".
+   Ejecutar como: **Yo** · Quién tiene acceso: **Cualquier usuario**. Autoriza y copia la URL (`.../exec`).
+4. En Vercel → Settings → Environment Variables: `SHEETS_WEBHOOK_URL` (la URL) y `SHEETS_SECRET` (la misma clave).
+5. Redeploy. Cada inscripción agrega una fila: Fecha, Nombre, Correo, WhatsApp, Página.
+   Para Excel: Archivo → Descargar → Microsoft Excel (.xlsx).
 
 ## Landing: pendientes
 
