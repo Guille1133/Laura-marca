@@ -36,8 +36,8 @@ if (form) {
     msg.textContent = "";
 
     const data = Object.fromEntries(new FormData(form));
-    if (!data.name.trim() || data.phone.replace(/\D/g, "").length < 7) {
-      msg.textContent = "Revisa tu nombre y tu WhatsApp.";
+    if (!data.name.trim() || !form.email.checkValidity() || data.phone.replace(/\D/g, "").length < 7) {
+      msg.textContent = "Revisa tu nombre, correo y WhatsApp.";
       return;
     }
 

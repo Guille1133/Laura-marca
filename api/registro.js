@@ -8,8 +8,12 @@ module.exports = async (req, res) => {
     return res.status(405).send("Método no permitido");
   }
 
-  const { name, phone } = req.body || {};
-  if (!String(name || "").trim() || String(phone || "").replace(/\D/g, "").length < 7) {
+  const { name, email, phone } = req.body || {};
+  if (
+    !String(name || "").trim() ||
+    !/^\S+@\S+\.\S+$/.test(email || "") ||
+    String(phone || "").replace(/\D/g, "").length < 7
+  ) {
     return res.status(400).send("Datos inválidos");
   }
 
@@ -18,6 +22,7 @@ module.exports = async (req, res) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       name: String(name).trim().slice(0, 200),
+      email: String(email).trim().slice(0, 200),
       phone: String(phone).trim().slice(0, 50),
       source: "masterclass",
     }),
