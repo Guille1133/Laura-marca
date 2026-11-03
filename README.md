@@ -13,6 +13,7 @@ script.js                → animaciones al hacer scroll + Calendly
 masterclass/index.html   → página de captura de la masterclass (/masterclass)
 masterclass/gracias.html → página de gracias (/masterclass/gracias)
 masterclass/masterclass.js → fecha, cuenta regresiva, formulario, WhatsApp
+presentacion/index.html  → presentación (/presentacion), provisional
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
 assets/                  → fotos de Laura
 ```
