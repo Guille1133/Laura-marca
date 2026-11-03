@@ -30,7 +30,7 @@ Cada inscripción crea una fila en la base de Notion **Inscritos Masterclass · 
 
 ## Landing: pendientes
 
-- [ ] Link de Calendly en `script.js` (`CALENDLY_URL`)
+- [x] Link de Calendly en `script.js` (`CALENDLY_URL`)
 - [x] Foto principal en `assets/laura.jpg` (vertical, 4:5)
 - [x] Foto secundaria en `assets/laura-about.jpg` (cuadrada)
 - [x] Testimonios reales (capturas originales en `Testimonios/`, fuera de git)

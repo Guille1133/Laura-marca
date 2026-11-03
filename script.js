@@ -1,5 +1,5 @@
-// Link de Calendly de la llamada de diagnóstico, ej: "https://calendly.com/laura/diagnostico"
-const CALENDLY_URL = "";
+// Link de Calendly de la llamada de diagnóstico
+const CALENDLY_URL = "https://calendly.com/laura-azulnavegante/sesion-de-claridad-clone";
 
 // Aparición suave de las secciones al hacer scroll
 const observer = new IntersectionObserver(
