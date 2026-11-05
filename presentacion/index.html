@@ -3,15 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Presentación · Laura Restrepo</title>
-  <!-- Página provisional: quitar noindex cuando tenga contenido -->
+  <title>EXPANSIÓN · Programa de 6 meses con Laura Restrepo</title>
+  <meta name="description" content="De Navegante a Arquitecto de tu Destino. Conoce el recorrido de 6 meses, lo que incluye y la inversión." />
+  <!-- Se comparte por link: no aparece en Google. Quitar esta línea si se quiere indexar. -->
   <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#1a0b2e" />
+
+  <meta property="og:title" content="EXPANSIÓN · De Navegante a Arquitecto de tu Destino" />
+  <meta property="og:description" content="El programa de 6 meses con Laura Restrepo: lo que incluye, mes a mes." />
+  <meta property="og:image" content="https://azulnavegante.com/assets/laura.jpg" />
+  <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/presentacion/presentacion.css" />
 </head>
 <body>
   <div class="aura" aria-hidden="true">
@@ -21,14 +28,205 @@
   </div>
 
   <header class="nav">
-    <a href="/" class="nav__logo">Laura Restrepo</a>
+    <a href="#inicio" class="nav__logo">Expansión</a>
+    <a href="#agenda" class="btn btn--small">Agenda tu llamada</a>
   </header>
 
-  <main class="section">
-    <div class="container container--narrow center">
-      <p class="eyebrow reveal">Muy pronto</p>
-      <h1 class="reveal">Presentación<br /><em>en preparación</em></h1>
-    </div>
+  <main>
+    <!-- PORTADA -->
+    <section class="hero" id="inicio">
+      <div class="hero__text reveal">
+        <p class="eyebrow">Azul Navegante presenta</p>
+        <h1>Expansión<br /><em>De Navegante a Arquitecto de tu Destino</em></h1>
+        <p class="lead">
+          Donde tu propósito revelado, tus dones espirituales únicos y tu esencia más profunda
+          se convierten en un proyecto de vida abundante que sana e impacta millones.
+        </p>
+        <a href="#recorrido" class="btn">Ver el recorrido</a>
+        <p class="cta-note">Programa de 6 meses con Laura Restrepo</p>
+      </div>
+      <div class="hero__photo reveal">
+        <div class="photo-frame">
+          <img src="/assets/laura.jpg" alt="Laura Restrepo" />
+        </div>
+      </div>
+    </section>
+
+    <section class="pres-stats" aria-label="El programa en cifras">
+      <dl class="container pres-stats__grid reveal">
+        <div><dt>6</dt><dd>meses y 6 puertos</dd></div>
+        <div><dt>24</dt><dd>sesiones 1:1, grabadas</dd></div>
+        <div><dt>6</dt><dd>módulos de formación</dd></div>
+        <div><dt>12</dt><dd>clases grupales en vivo</dd></div>
+      </dl>
+    </section>
+
+    <!-- DE NAVEGANTE A ARQUITECTO -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow reveal">La evolución</p>
+        <h2 class="reveal">Ya tienes el mapa.<br /><em>Ahora toca construir.</em></h2>
+        <div class="fases">
+          <article class="fase reveal">
+            <p class="fase__tag">Fase 1 · Azul Navegante</p>
+            <h3>Preparar el terreno, abonar, sembrar</h3>
+            <ul>
+              <li>El navegante perdido en el mar encuentra su brújula interna.</li>
+              <li>Descubre el mapa de su alma y los 4 puertos de transformación.</li>
+              <li>Reprograma su identidad vibracional.</li>
+            </ul>
+            <p class="fase__result"><strong>Resultado:</strong> sabe quién es y hacia dónde va.</p>
+          </article>
+          <article class="fase fase--on reveal">
+            <p class="fase__tag">Fase 2 · Expansión</p>
+            <h3>Cultivar, cosechar, comercializar, expandir</h3>
+            <ul>
+              <li>El navegante se convierte en arquitecto con dones despiertos.</li>
+              <li>Ya no solo navega: construye desde su esencia espiritual.</li>
+              <li>Activa y monetiza sus dones para servir al mundo.</li>
+              <li>Diseña un proyecto de vida abundante y con impacto real.</li>
+            </ul>
+            <p class="fase__result"><strong>Resultado:</strong> vive de su propósito y sus dones, e impacta millones.</p>
+          </article>
+        </div>
+        <p class="pres-metodo reveal">
+          <strong>Método TRE™: Transformación, Revelación y Expansión.</strong>
+          El método de Laura que integra reprogramación identitaria, activación de dones espirituales,
+          proyecto de vida y expansión consciente.
+        </p>
+      </div>
+    </section>
+
+    <!-- RECORRIDO -->
+    <section class="section section--alt" id="recorrido">
+      <div class="container">
+        <p class="eyebrow reveal">El recorrido</p>
+        <h2 class="reveal">6 puertos en <em>6 meses</em></h2>
+        <p class="lead reveal">Toca cada puerto para ver lo que trabajas ese mes.</p>
+        <ol class="ruta" id="ruta"></ol>
+        <div class="puerto" id="puerto" tabindex="-1"></div>
+      </div>
+    </section>
+
+    <!-- QUÉ INCLUYE -->
+    <section class="section" id="incluye">
+      <div class="container container--narrow">
+        <p class="eyebrow reveal">Qué incluye</p>
+        <h2 class="reveal">Todo lo que recibes <em>en el programa</em></h2>
+        <p class="lead reveal">Toca cada componente para ver el detalle.</p>
+        <div class="valor reveal">
+          <details>
+            <summary><span>24 sesiones 1:1 personalizadas</span><b>$3,600</b></summary>
+            <p>4 por mes. Quedan grabadas y se suben a tu módulo privado personal.</p>
+          </details>
+          <details>
+            <summary><span>6 módulos de formación en Hotmart</span><b>$2,000</b></summary>
+            <p>Videos pregrabados: un módulo para cada mes del programa.</p>
+          </details>
+          <details>
+            <summary><span>Módulo de marca personal con mentor experto</span><b>$1,800</b></summary>
+            <p>Con un mentor experto en marcas personales con propósito, conectado con el proyecto de vida que construyes en el programa.</p>
+          </details>
+          <details>
+            <summary><span>Mentoría en activación de dones con Laura</span><b>$2,000</b></summary>
+            <p>Mentoría directa para identificar, activar e integrar tus dones espirituales.</p>
+          </details>
+          <details>
+            <summary><span>12 clases grupales en vivo</span><b>$1,200</b></summary>
+            <p>2 por mes. Se irán incorporando conforme crezca el grupo.</p>
+          </details>
+          <details>
+            <summary><span>Mastermind mensual exclusivo</span><b>$900</b></summary>
+            <p>1 sesión grupal estratégica por mes. Se activa conforme se forme el grupo.</p>
+          </details>
+          <details>
+            <summary><span>Material de implementación semanal</span><b>$800</b></summary>
+            <p>Workbooks, meditaciones, protocolos y guías.</p>
+          </details>
+          <details>
+            <summary><span>Acceso vitalicio a la plataforma</span><b>$500</b></summary>
+            <p>La plataforma Hotmart y todas las grabaciones quedan disponibles para ti.</p>
+          </details>
+          <details>
+            <summary><span>Soporte directo por WhatsApp con Laura</span><b>$600</b></summary>
+            <p>Tu línea directa con Laura.</p>
+          </details>
+          <p class="valor__total"><span>Valor total</span><b>$13,400 USD</b></p>
+        </div>
+
+        <h3 class="pres-sub reveal">Además</h3>
+        <div class="bonus">
+          <article class="bonus__item reveal">
+            <p class="fase__tag">Bonus 1 · Valor $500 USD</p>
+            <h3>Sanación energética familiar</h3>
+            <p>1 sesión para sanar dinámicas familiares que afectan tu expansión y la activación de tus dones.</p>
+          </article>
+          <article class="bonus__item reveal">
+            <p class="fase__tag">Bonus 2 · Valor $800 USD</p>
+            <h3>Activación individual de dones</h3>
+            <p>Sesión virtual personalizada con Laura, enfocada en tu don principal: activación profunda, protocolo de desarrollo y protección energética.</p>
+          </article>
+          <article class="bonus__item reveal">
+            <p class="fase__tag">Comunidad privada</p>
+            <h3>Navegantes en expansión</h3>
+            <p>Soporte de Laura por mensaje, celebración de victorias, accountability semanal y recursos compartidos. Los primeros alumnos son los fundadores del movimiento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVERSIÓN -->
+    <section class="section section--alt" id="inversion">
+      <div class="container container--narrow center">
+        <p class="eyebrow reveal">Tu inversión</p>
+        <h2 class="reveal">Elige la forma de pago <em>que se adapta a tu historia</em></h2>
+        <div class="pago reveal">
+          <fieldset class="pago__opciones">
+            <legend class="sr-only">Forma de pago</legend>
+            <label><input type="radio" name="pago" value="unico" checked /><span>Pago único</span></label>
+            <label><input type="radio" name="pago" value="tres" /><span>3 cuotas</span></label>
+            <label><input type="radio" name="pago" value="seis" /><span>6 cuotas</span></label>
+          </fieldset>
+          <p class="pago__monto" aria-live="polite"><span id="pagoMonto">$2,500</span> <small>USD</small></p>
+          <p class="pago__detalle" id="pagoDetalle">Un solo pago</p>
+        </div>
+        <p class="pago__nota reveal">
+          Precio especial para alumnos de Azul Navegante.
+          Precio de lista para público general: $2,900 USD.
+        </p>
+      </div>
+    </section>
+
+    <!-- GARANTÍA -->
+    <section class="section">
+      <div class="container container--narrow">
+        <div class="garantia reveal">
+          <p class="eyebrow">Garantía de transformación total</p>
+          <h2>Si haces tu parte, <em>sigo contigo</em></h2>
+          <p>Si completas el 100% del programa (asistes a todas las sesiones, implementas cada módulo y participas en las clases grupales) y no logras:</p>
+          <ul>
+            <li>Claridad absoluta y acción real sobre tu proyecto de vida</li>
+            <li>Tu marca personal construida y activa, con identidad propia</li>
+            <li>Generar tus primeros ingresos reales en los 6 meses</li>
+            <li>Activar y comenzar a usar conscientemente tus dones espirituales</li>
+          </ul>
+          <p class="garantia__cierre">…trabajaré contigo sin costo adicional hasta que alcances estos resultados.</p>
+          <p class="garantia__firma">Laura Restrepo</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section class="section section--alt" id="agenda">
+      <div class="container container--narrow">
+        <p class="eyebrow reveal">Siguiente paso</p>
+        <h2 class="reveal">Hablemos de <em>tu expansión</em></h2>
+        <p class="pres-agenda-lead reveal">Agenda tu llamada con Laura y resuelve tus dudas sobre el programa.</p>
+        <div class="booking reveal" id="calendly">
+          <div class="booking__placeholder"><p>Cargando calendario…</p></div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -40,5 +238,6 @@
   </footer>
 
   <script src="/script.js"></script>
+  <script src="/presentacion/presentacion.js"></script>
 </body>
 </html>
