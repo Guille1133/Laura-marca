@@ -36,7 +36,7 @@ Cada inscripción crea una fila en la base de Notion **Inscritos Masterclass · 
 - [x] Testimonios reales (capturas originales en `Testimonios/`, fuera de git)
 - [x] Historia de Laura en la sección "Sobre mí"
 - [x] Llamada: gratuita, 30 minutos
-- [ ] Dominio
+- [x] Dominio: expansiondonesespirituales.com
 
 ## Ver en local
 
@@ -48,4 +48,4 @@ npx serve .
 
 ## Deploy
 
-Vercel publica cada push a `main` en https://azulnavegante.com (DNS en GoDaddy: `A @ 76.76.21.21` y `CNAME www cname.vercel-dns.com`; `www` redirige al dominio raíz).
+Vercel publica cada push a `main` en https://expansiondonesespirituales.com (DNS en Namecheap: `A @ 76.76.21.21` y `CNAME www cname.vercel-dns.com`; `www` redirige al dominio raíz). El dominio anterior, azulnavegante.com, venció; si se renueva, redirige al nuevo.

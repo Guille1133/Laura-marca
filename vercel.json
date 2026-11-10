@@ -3,8 +3,35 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.azulnavegante.com" }],
-      "destination": "https://azulnavegante.com/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.expansiondonesespirituales.com"
+        }
+      ],
+      "destination": "https://expansiondonesespirituales.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "azulnavegante.com"
+        }
+      ],
+      "destination": "https://expansiondonesespirituales.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.azulnavegante.com"
+        }
+      ],
+      "destination": "https://expansiondonesespirituales.com/:path*",
       "permanent": true
     }
   ]
