@@ -48,4 +48,4 @@ npx serve .
 
 ## Deploy
 
-Vercel publica cada push a `main` en https://expansiondonesespirituales.com (DNS en Namecheap: `A @ 216.198.79.1` y `CNAME www cname.vercel-dns.com`; `www` redirige al dominio raíz). El dominio anterior, azulnavegante.com, venció; si se renueva, redirige al nuevo.
+Vercel publica cada push a `main` en https://expansiondonesespirituales.com (DNS en Namecheap: `A @ 216.198.79.1` y `CNAME www 7502c633041f213d.vercel-dns-017.com`; `www` redirige al dominio raíz). El dominio anterior, azulnavegante.com, venció; si se renueva, redirige al nuevo.
