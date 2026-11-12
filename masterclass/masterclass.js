@@ -31,15 +31,42 @@ if (form) {
   const msg = form.querySelector("[data-form-msg]");
   const button = form.querySelector("button");
 
+  // Códigos de país para el WhatsApp (el valor es el código sin "+")
+  const PAISES = [
+    ["Colombia", "57"], ["México", "52"], ["Estados Unidos", "1"], ["España", "34"],
+    ["Argentina", "54"], ["Bolivia", "591"], ["Brasil", "55"], ["Canadá", "1"],
+    ["Chile", "56"], ["Costa Rica", "506"], ["Cuba", "53"], ["Ecuador", "593"],
+    ["El Salvador", "503"], ["Guatemala", "502"], ["Honduras", "504"], ["Nicaragua", "505"],
+    ["Panamá", "507"], ["Paraguay", "595"], ["Perú", "51"], ["Puerto Rico", "1"],
+    ["República Dominicana", "1"], ["Uruguay", "598"], ["Venezuela", "58"],
+    ["Alemania", "49"], ["Australia", "61"], ["Francia", "33"], ["Italia", "39"],
+    ["Países Bajos", "31"], ["Portugal", "351"], ["Reino Unido", "44"], ["Suiza", "41"],
+  ];
+  const country = form.querySelector("[data-country]");
+  PAISES.forEach(([nombre, codigo], i) => {
+    if (i === 4) country.append(new Option("──────────", "", false, false));
+    country.append(new Option(`+${codigo} ${nombre}`, codigo));
+  });
+  country.options[5].disabled = true; // separador
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     msg.textContent = "";
 
     const data = Object.fromEntries(new FormData(form));
-    if (!data.name.trim() || !form.email.checkValidity() || data.phone.replace(/\D/g, "").length < 7) {
+    const digitos = (data.phone || "").replace(/\D/g, "").replace(/^0+/, "");
+    if (!data.country) {
+      msg.textContent = "Selecciona el código de tu país.";
+      country.focus();
+      return;
+    }
+    if (!data.name.trim() || !form.email.checkValidity() || digitos.length < 7) {
       msg.textContent = "Revisa tu nombre, correo y WhatsApp.";
       return;
     }
+    // Se guarda completo, listo para WhatsApp: +57 3001234567
+    data.phone = `+${data.country} ${digitos}`;
+    delete data.country;
 
     button.disabled = true;
     button.textContent = "Reservando…";

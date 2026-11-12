@@ -66,10 +66,18 @@
             <span>Correo electrónico</span>
             <input type="email" name="email" autocomplete="email" required placeholder="tucorreo@ejemplo.com" />
           </label>
-          <label>
-            <span>WhatsApp</span>
-            <input type="tel" name="phone" autocomplete="tel" required placeholder="+57 300 000 0000" />
-          </label>
+          <div class="phone-row">
+            <label>
+              <span>País</span>
+              <select name="country" required data-country>
+                <option value="" selected disabled>Código</option>
+              </select>
+            </label>
+            <label>
+              <span>WhatsApp</span>
+              <input type="tel" name="phone" autocomplete="tel-national" inputmode="tel" required placeholder="300 000 0000" />
+            </label>
+          </div>
           <button type="submit" class="btn btn--block">Quiero mi lugar</button>
           <p class="form-msg" data-form-msg role="status"></p>
           <p class="form-legal">El enlace de acceso y los recordatorios llegan por el grupo de WhatsApp.</p>
