@@ -104,11 +104,84 @@
 .chain .step h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
 .chain .step p { font-size: 0.95rem; }
 
-.quiz__cta { text-align: left; }
-.quiz__cta h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
-.quiz__cta p { color: var(--text-muted); }
-.quiz__cta p strong { color: var(--text); font-weight: 500; }
-.quiz__cta .btn--ghost { margin-top: 0.75rem; }
+/* Masterclass como solución */
+.quiz__bridge {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.25;
+}
+.quiz__bridge em { color: var(--gold); }
+
+.mc-card {
+  position: relative;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.75rem);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(217, 189, 132, 0.25), transparent 60%),
+    linear-gradient(180deg, rgba(123, 63, 228, 0.45), rgba(38, 18, 66, 0.85));
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 0 0 6px rgba(217, 189, 132, 0.08), 0 30px 90px -20px rgba(180, 63, 228, 0.8);
+}
+.mc-card .badge { margin-bottom: 1.25rem; font-weight: 400; }
+.mc-card__kicker {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--gold);
+  text-shadow: 0 0 24px rgba(217, 189, 132, 0.55);
+}
+.mc-card__kicker span {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  color: var(--lavender-200);
+  text-shadow: none;
+}
+.mc-card__title {
+  font-size: clamp(2.6rem, 8vw, 3.8rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.mc-card__copy { color: var(--lavender-200); max-width: 32rem; margin: 0 auto 1.75rem; }
+
+.mc-card__date {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  background: var(--gold);
+  color: var(--plum-950);
+  box-shadow: 0 12px 40px -12px rgba(217, 189, 132, 0.8);
+}
+.mc-card__day {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.mc-card__time { font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em; }
+
+.mc-card__countdown { justify-content: center; margin-bottom: 1.75rem; }
+.mc-card__note { color: var(--text-muted); font-size: 0.95rem; margin: 0 0 0.5rem; }
+.mc-card__note strong { color: var(--text); font-weight: 500; }
+
+.btn--big {
+  padding: 1.25rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+}
+.mc-card .btn--big { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse {
+  50% { box-shadow: 0 0 0 10px rgba(180, 63, 228, 0), 0 16px 60px -8px rgba(180, 63, 228, 1); transform: scale(1.02); }
+}
 
 @media (max-width: 760px) {
   .chain { grid-template-columns: 1fr; }
@@ -116,6 +189,6 @@
 @media (prefers-reduced-motion: reduce) {
   .quiz__screen { animation: none; }
   .quiz__option:hover { transform: none; }
+  .mc-card .btn--big { animation: none; }
 }
-.quiz__cta .btn { text-align: center; }
-.quiz button.btn { border: 0; font: inherit; cursor: pointer; }
+.quiz button.btn { border: 0; font-family: inherit; cursor: pointer; }

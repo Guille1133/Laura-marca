@@ -39,7 +39,7 @@
         Todos llegamos con un don. Es la pista de tu propósito, y tu propósito es la puerta
         a una abundancia sin límites. Responde con lo primero que sientas.
       </p>
-      <button type="button" class="btn" data-start>Descubrir mi don</button>
+      <button type="button" class="btn btn--big" data-start>Descubrir mi don</button>
     </section>
 
     <!-- PREGUNTAS (se generan desde quiz.js) -->
@@ -118,16 +118,28 @@
         </li>
       </ol>
 
-      <div class="form-card quiz__cta">
-        <p class="eyebrow">El siguiente paso</p>
-        <h2>Ya sabes cuál es tu don.<br /><em>Ahora aprende a monetizarlo.</em></h2>
-        <p data-r-bridge></p>
-        <p>
-          Tu lugar en la masterclass en vivo del <strong>domingo 15 de noviembre</strong> ya está reservado.
-          Para recibir el enlace de acceso, únete al grupo de WhatsApp: es la única vía.
-        </p>
-        <a href="#" class="btn btn--block" data-whatsapp>Unirme al grupo de la masterclass</a>
-        <a href="#" class="btn btn--ghost btn--block" data-calendar target="_blank" rel="noopener">Agregar a Google Calendar</a>
+      <p class="quiz__bridge">Ya sabes cuál es tu don.<br /><em>Ahora aprende a monetizarlo.</em></p>
+
+      <div class="mc-card">
+        <p class="badge">✦ Tu solución</p>
+        <p class="mc-card__kicker">Masterclass <span>en vivo · gratuita</span></p>
+        <h2 class="mc-card__title">Monetiza tus<br /><em>dones espirituales</em></h2>
+        <p class="mc-card__copy" data-r-bridge></p>
+
+        <div class="mc-card__date">
+          <span class="mc-card__day">Domingo 15 de noviembre</span>
+          <span class="mc-card__time">7:00 p. m. · Hora Colombia · Online</span>
+        </div>
+
+        <div class="countdown mc-card__countdown" data-countdown aria-label="Tiempo para la masterclass">
+          <div><strong data-unit="days">00</strong><span>días</span></div>
+          <div><strong data-unit="hours">00</strong><span>horas</span></div>
+          <div><strong data-unit="minutes">00</strong><span>min</span></div>
+          <div><strong data-unit="seconds">00</strong><span>seg</span></div>
+        </div>
+
+        <p class="mc-card__note">Tu lugar ya está reservado. El enlace de acceso llega <strong>solo</strong> por el grupo de WhatsApp.</p>
+        <a href="#" class="btn btn--block btn--big" data-whatsapp>Unirme al grupo de la Masterclass</a>
       </div>
     </section>
   </main>
