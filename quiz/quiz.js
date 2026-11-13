@@ -30,7 +30,6 @@
     },
   };
 
-  // type "insight": pausa de revelación entre preguntas
   const PASOS = [
     {
       id: "p1",
@@ -61,10 +60,6 @@
         ["Siempre tienes el mensaje que necesitaban", "canal"],
         ["Les ayudas a encontrar claridad y rumbo", "guia"],
       ],
-    },
-    {
-      type: "insight",
-      texto: "Tu energía ya está hablando. Los dones no aparecen por accidente: son la pista más clara de tu propósito.",
     },
     {
       id: "etapa",
@@ -98,10 +93,6 @@
         ["Sé que creo mi realidad y estoy sanando mis bloqueos", 2],
         ["Vivo desde mi propósito y quiero expandirlo", 3],
       ],
-    },
-    {
-      type: "insight",
-      texto: "Tu don, tu propósito y tu abundancia son la misma energía. Cuando uno despierta, los otros dos empiezan a moverse.",
     },
     {
       id: "ocupacion",
@@ -149,7 +140,7 @@
   const screens = Object.fromEntries(
     [...document.querySelectorAll("[data-screen]")].map((el) => [el.dataset.screen, el])
   );
-  const preguntas = PASOS.filter((p) => !p.type);
+  const preguntas = PASOS;
   const respuestas = {}; // id → índice de la opción
   let paso = 0;
 
@@ -163,12 +154,6 @@
   const render = () => {
     const actual = PASOS[paso];
     if (!actual) return show("contact", screens.contact.querySelector("input"));
-
-    if (actual.type === "insight") {
-      const quote = screens.insight.querySelector("[data-insight]");
-      quote.textContent = actual.texto;
-      return show("insight", quote);
-    }
 
     const n = preguntas.indexOf(actual) + 1;
     screens.question.querySelector("[data-step]").textContent = `Pregunta ${n} de ${preguntas.length}`;
@@ -197,9 +182,8 @@
   };
 
   screens.intro.querySelector("[data-start]").addEventListener("click", render);
-  screens.insight.querySelector("[data-continue]").addEventListener("click", () => { paso++; render(); });
   screens.question.querySelector("[data-back]").addEventListener("click", () => {
-    do paso--; while (paso > 0 && PASOS[paso].type);
+    paso--;
     render();
   });
 

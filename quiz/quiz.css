@@ -15,7 +15,7 @@
 }
 
 .quiz__screen .lead { margin-bottom: 2.2rem; }
-.quiz h2:focus, .quiz h1:focus, .quiz blockquote:focus { outline: none; }
+.quiz h2:focus, .quiz h1:focus { outline: none; }
 
 /* ---------- Progreso ---------- */
 .quiz__progress {
@@ -80,10 +80,6 @@
 }
 .quiz__back:hover { color: var(--lavender-200); }
 .quiz__back[hidden] { display: none; }
-
-/* ---------- Pausas ---------- */
-.quiz__symbol { font-size: 2rem; color: var(--gold); margin: 0; }
-[data-screen="insight"] .reframe { margin: 1rem auto 2.5rem; }
 
 /* ---------- Datos ---------- */
 [data-screen="contact"] .form-card { text-align: left; max-width: 520px; margin: 0 auto; }
