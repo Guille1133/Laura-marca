@@ -13,6 +13,7 @@ script.js                → animaciones al hacer scroll + Calendly
 masterclass/index.html   → página de captura de la masterclass (/masterclass)
 masterclass/gracias.html → página de gracias (/masterclass/gracias)
 masterclass/masterclass.js → fecha, cuenta regresiva, formulario, WhatsApp
+quiz/                    → quiz "¿Cuál es tu don?" que inscribe a la masterclass (/quiz)
 presentacion/            → presentación comercial del programa EXPANSIÓN (/presentacion)
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
 assets/                  → fotos de Laura
@@ -27,6 +28,14 @@ assets/                  → fotos de Laura
 
 Cada inscripción crea una fila en la base de Notion **Inscritos Masterclass · Laura**
 (flujo de n8n "Azul Navegante — Inscritos Masterclass"). Para Excel: en Notion, ••• → Exportar → CSV.
+
+## Quiz
+
+`/quiz` revela el don de la persona (sanación, visión, canalización o guía) y la inscribe
+a la masterclass con el mismo `/api/registro`. Además de nombre, correo y WhatsApp envía a n8n
+`source: "quiz"` y los campos `quiz_don`, `quiz_prioridad` (Alta/Media/Baja), `quiz_etapa`,
+`quiz_monetizar`, `quiz_consciencia`, `quiz_ocupacion`, `quiz_ingresos` y `quiz_inversion`.
+Las preguntas y textos están en `quiz/quiz.js`.
 
 ## Landing: pendientes
 

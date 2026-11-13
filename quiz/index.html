@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Descubre tu don · Laura Restrepo</title>
+  <meta name="description" content="Un quiz de 2 minutos para descubrir cuál es tu don espiritual y cómo está conectado con tu propósito y tu abundancia." />
+  <meta name="theme-color" content="#1a0b2e" />
+
+  <meta property="og:title" content="¿Cuál es tu don espiritual?" />
+  <meta property="og:description" content="Descúbrelo en 2 minutos con Laura Restrepo." />
+  <meta property="og:image" content="https://expansiondonesespirituales.com/assets/laura.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/masterclass/masterclass.css" />
+  <link rel="stylesheet" href="/quiz/quiz.css" />
+</head>
+<body>
+  <div class="aura" aria-hidden="true">
+    <span class="orb orb--1"></span>
+    <span class="orb orb--2"></span>
+    <span class="orb orb--3"></span>
+  </div>
+
+  <header class="nav">
+    <a href="/" class="nav__logo">Laura Restrepo</a>
+  </header>
+
+  <main class="quiz">
+    <!-- INTRO -->
+    <section class="quiz__screen is-active" data-screen="intro">
+      <p class="badge">✦ Quiz gratuito · 2 minutos</p>
+      <h1>¿Cuál es tu<br /><em>don espiritual?</em></h1>
+      <p class="lead center">
+        Todos llegamos con un don. Es la pista de tu propósito, y tu propósito es la puerta
+        a una abundancia sin límites. Responde con lo primero que sientas.
+      </p>
+      <button type="button" class="btn" data-start>Descubrir mi don</button>
+    </section>
+
+    <!-- PREGUNTAS (se generan desde quiz.js) -->
+    <section class="quiz__screen" data-screen="question">
+      <div class="quiz__progress" aria-hidden="true"><span data-progress></span></div>
+      <p class="eyebrow" data-step></p>
+      <h2 class="quiz__question" data-question tabindex="-1"></h2>
+      <div class="quiz__options" data-options role="group"></div>
+      <button type="button" class="quiz__back" data-back>← Volver</button>
+    </section>
+
+    <!-- PAUSAS DE REVELACIÓN -->
+    <section class="quiz__screen" data-screen="insight">
+      <p class="quiz__symbol" aria-hidden="true">✦</p>
+      <blockquote class="reframe" data-insight tabindex="-1"></blockquote>
+      <button type="button" class="btn" data-continue>Continuar</button>
+    </section>
+
+    <!-- DATOS -->
+    <section class="quiz__screen" data-screen="contact">
+      <div class="form-card">
+        <p class="eyebrow">Tu resultado está listo</p>
+        <h2>¿A nombre de quién<br /><em>lo revelamos?</em></h2>
+        <p class="form-card__sub">
+          Con tus datos ves tu resultado y te reservamos un lugar en la masterclass gratuita
+          <strong>Monetiza tus dones espirituales</strong> del domingo 15 de noviembre.
+        </p>
+        <form class="signup" data-quiz-form novalidate>
+          <label>
+            <span>Nombre</span>
+            <input type="text" name="name" autocomplete="given-name" required placeholder="Tu nombre" />
+          </label>
+          <label>
+            <span>Correo electrónico</span>
+            <input type="email" name="email" autocomplete="email" required placeholder="tucorreo@ejemplo.com" />
+          </label>
+          <div class="phone-row">
+            <label>
+              <span>País</span>
+              <select name="country" required data-country>
+                <option value="" selected disabled>Código</option>
+              </select>
+            </label>
+            <label>
+              <span>WhatsApp</span>
+              <input type="tel" name="phone" autocomplete="tel-national" inputmode="tel" required placeholder="300 000 0000" />
+            </label>
+          </div>
+          <button type="submit" class="btn btn--block">Ver mi resultado</button>
+          <p class="form-msg" data-form-msg role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- RESULTADO -->
+    <section class="quiz__screen quiz__result" data-screen="result">
+      <p class="badge">✦ <span data-r-name></span>, este es tu don</p>
+      <h1 data-r-title tabindex="-1"></h1>
+      <p class="lead center" data-r-desc></p>
+
+      <ol class="chain">
+        <li class="step">
+          <span class="step__num">01</span>
+          <h3>Tu don</h3>
+          <p data-r-don></p>
+        </li>
+        <li class="step">
+          <span class="step__num">02</span>
+          <h3>Tu propósito</h3>
+          <p data-r-proposito></p>
+        </li>
+        <li class="step">
+          <span class="step__num">03</span>
+          <h3>Tu abundancia</h3>
+          <p>Cuando pones tu don al servicio de quien lo necesita, el dinero deja de ser una meta y se vuelve la consecuencia natural de tu propósito. Esa abundancia no tiene techo: crece con cada vida que tocas.</p>
+        </li>
+      </ol>
+
+      <div class="form-card quiz__cta">
+        <p class="eyebrow">El siguiente paso</p>
+        <h2>Ya sabes cuál es tu don.<br /><em>Ahora aprende a monetizarlo.</em></h2>
+        <p data-r-bridge></p>
+        <p>
+          Tu lugar en la masterclass en vivo del <strong>domingo 15 de noviembre</strong> ya está reservado.
+          Para recibir el enlace de acceso, únete al grupo de WhatsApp: es la única vía.
+        </p>
+        <a href="#" class="btn btn--block" data-whatsapp>Unirme al grupo de la masterclass</a>
+        <a href="#" class="btn btn--ghost btn--block" data-calendar target="_blank" rel="noopener">Agregar a Google Calendar</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__quote">Dios te dio el regalo, te toca a ti monetizarlo.</p>
+    <p>
+      <a href="https://www.instagram.com/laurarestrepocastilla/" target="_blank" rel="noopener">@laurarestrepocastilla</a>
+      · © <span id="year"></span> Laura Restrepo
+    </p>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/masterclass/masterclass.js"></script>
+  <script src="/quiz/quiz.js"></script>
+</body>
+</html>

@@ -4,6 +4,25 @@ const MASTERCLASS_DURATION_MIN = 90;
 // Grupo de WhatsApp (botón en la página de gracias)
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HB2Q6lFJp5Y2kCvXkfGQo2";
 
+// Códigos de país para el WhatsApp (el valor es el código sin "+")
+const PAISES = [
+  ["Colombia", "57"], ["México", "52"], ["Estados Unidos", "1"], ["España", "34"],
+  ["Argentina", "54"], ["Bolivia", "591"], ["Brasil", "55"], ["Canadá", "1"],
+  ["Chile", "56"], ["Costa Rica", "506"], ["Cuba", "53"], ["Ecuador", "593"],
+  ["El Salvador", "503"], ["Guatemala", "502"], ["Honduras", "504"], ["Nicaragua", "505"],
+  ["Panamá", "507"], ["Paraguay", "595"], ["Perú", "51"], ["Puerto Rico", "1"],
+  ["República Dominicana", "1"], ["Uruguay", "598"], ["Venezuela", "58"],
+  ["Alemania", "49"], ["Australia", "61"], ["Francia", "33"], ["Italia", "39"],
+  ["Países Bajos", "31"], ["Portugal", "351"], ["Reino Unido", "44"], ["Suiza", "41"],
+];
+function fillCountries(select) {
+  PAISES.forEach(([nombre, codigo], i) => {
+    if (i === 4) select.append(new Option("──────────", "", false, false));
+    select.append(new Option(`+${codigo} ${nombre}`, codigo));
+  });
+  select.options[5].disabled = true; // separador
+}
+
 // Cuenta regresiva
 const countdown = document.querySelector("[data-countdown]");
 if (countdown) {
@@ -31,23 +50,8 @@ if (form) {
   const msg = form.querySelector("[data-form-msg]");
   const button = form.querySelector("button");
 
-  // Códigos de país para el WhatsApp (el valor es el código sin "+")
-  const PAISES = [
-    ["Colombia", "57"], ["México", "52"], ["Estados Unidos", "1"], ["España", "34"],
-    ["Argentina", "54"], ["Bolivia", "591"], ["Brasil", "55"], ["Canadá", "1"],
-    ["Chile", "56"], ["Costa Rica", "506"], ["Cuba", "53"], ["Ecuador", "593"],
-    ["El Salvador", "503"], ["Guatemala", "502"], ["Honduras", "504"], ["Nicaragua", "505"],
-    ["Panamá", "507"], ["Paraguay", "595"], ["Perú", "51"], ["Puerto Rico", "1"],
-    ["República Dominicana", "1"], ["Uruguay", "598"], ["Venezuela", "58"],
-    ["Alemania", "49"], ["Australia", "61"], ["Francia", "33"], ["Italia", "39"],
-    ["Países Bajos", "31"], ["Portugal", "351"], ["Reino Unido", "44"], ["Suiza", "41"],
-  ];
   const country = form.querySelector("[data-country]");
-  PAISES.forEach(([nombre, codigo], i) => {
-    if (i === 4) country.append(new Option("──────────", "", false, false));
-    country.append(new Option(`+${codigo} ${nombre}`, codigo));
-  });
-  country.options[5].disabled = true; // separador
+  fillCountries(country);
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
