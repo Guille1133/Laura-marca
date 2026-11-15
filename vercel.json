@@ -33,6 +33,11 @@
       ],
       "destination": "https://expansiondonesespirituales.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/whatsapp",
+      "destination": "https://chat.whatsapp.com/HB2Q6lFJp5Y2kCvXkfGQo2",
+      "permanent": false
     }
   ]
 }
