@@ -15,6 +15,7 @@ masterclass/gracias.html → página de gracias (/masterclass/gracias)
 masterclass/masterclass.js → fecha, cuenta regresiva, formulario, WhatsApp
 quiz/                    → quiz "¿Cuál es tu don?" que inscribe a la masterclass (/quiz)
 presentacion/            → presentación comercial del programa EXPANSIÓN (/presentacion)
+regalo/                  → regalo de la masterclass "La Física Cuántica del Dinero": plan de 5 días + Calendly (/regalo)
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
 assets/                  → fotos de Laura
 ```

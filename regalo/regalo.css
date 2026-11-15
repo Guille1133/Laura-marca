@@ -1,0 +1,113 @@
+/* Regalo: plan de 5 días. Reutiliza /styles.css y /presentacion/presentacion.css */
+
+.ecuacion {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  line-height: 1.25;
+}
+.fase--on .ecuacion { color: var(--gold); }
+.fase .fase__result { color: var(--text-muted); }
+
+.pilares { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.pilares li { color: var(--text-muted); }
+.pilares strong { display: block; color: var(--text); font-weight: 500; }
+
+/* Progreso */
+.progreso { margin: 1.5rem 0 0; max-width: 28rem; }
+.progreso__barra { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.progreso__barra span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--violet-400), var(--gold));
+  transition: width 0.5s ease;
+}
+.progreso p { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--text-muted); }
+
+.ruta--cinco { grid-template-columns: repeat(5, 1fr); }
+.ruta__btn.is-done span::after { content: " ✓"; color: var(--gold); }
+.ruta__btn[aria-current="step"].is-done span::after { color: #fff; }
+
+/* Día */
+.dia__sub {
+  margin: 1.75rem 0 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.checks { list-style: none; margin: 0; padding: 0 !important; display: grid; gap: 0.6rem; }
+.checks li + li { margin-top: 0 !important; }
+.check { display: flex; gap: 0.8rem; align-items: flex-start; cursor: pointer; color: var(--text); }
+.check input {
+  appearance: none;
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin: 0.2rem 0 0;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+.check input::after { content: "✓"; font-size: 0.85rem; color: var(--plum-950); transform: scale(0); transition: transform 0.15s; }
+.check input:checked { background: var(--gold); }
+.check input:checked::after { transform: scale(1); }
+.check input:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.check input:checked + span { color: var(--text-muted); text-decoration: line-through; text-decoration-color: rgba(217, 189, 132, 0.5); }
+
+.checks--chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.checks--chips .check {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(217, 200, 255, 0.2);
+  border-radius: 999px;
+  align-items: center;
+  font-size: 0.95rem;
+}
+.checks--chips .check input { width: 1rem; height: 1rem; margin: 0; }
+.checks--chips .check input:checked + span { text-decoration: none; color: var(--gold); }
+
+.declaracion {
+  margin: 1.75rem 0 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--gold);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: var(--lavender-200);
+}
+
+.nota { display: block; margin-bottom: 1rem; }
+.nota span { display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.98rem; }
+.nota textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(217, 200, 255, 0.2);
+  background: rgba(18, 7, 31, 0.6);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+.nota textarea::placeholder { color: rgba(185, 168, 214, 0.5); }
+.nota textarea:focus { outline: none; border-color: var(--violet-400); box-shadow: 0 0 0 3px rgba(157, 107, 255, 0.25); }
+
+.dia__acciones { margin-top: 1.5rem; text-align: center; }
+.dia__acciones .btn { border: 0; cursor: pointer; font: inherit; }
+.dia__acciones .btn--ghost { border: 1px solid var(--gold); background: transparent; box-shadow: none; }
+
+.regalo-cierre { color: var(--text-muted); }
+
+@media (max-width: 860px) {
+  .pilares { grid-template-columns: 1fr; }
+  .ruta--cinco { grid-template-columns: repeat(5, 1fr); gap: 0.35rem; }
+  .ruta--cinco .ruta__btn { min-height: 72px; padding: 0.6rem 0.15rem; }
+  .ruta--cinco .ruta__btn small { font-size: 0.62rem; letter-spacing: 0.06em; }
+  .ruta--cinco .ruta__btn span { font-size: clamp(0.72rem, 3.4vw, 1.05rem); }
+}
