@@ -17,6 +17,7 @@ quiz/                    → quiz "¿Cuál es tu don?" que inscribe a la masterc
 presentacion/            → presentación comercial del programa EXPANSIÓN (/presentacion)
 regalo/                  → regalo de la masterclass "La Física Cuántica del Dinero": plan de 5 días + Calendly (/regalo)
 admision/                → formulario de admisión de alumnos nuevos de Expansión (/admision)
+bienvenida/              → onboarding del alumno nuevo: mapa de 5 meses, 15 mentorías y sus fechas (/bienvenida)
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
 api/admision.js          → envía la admisión de Expansión a n8n, que la guarda en Notion ("Admisión Expansión · Alumnos")
 assets/                  → fotos de Laura
