@@ -1,0 +1,104 @@
+/* Admisión Expansión. Reutiliza /styles.css, /masterclass/masterclass.css y /quiz/quiz.css */
+
+.versiculo {
+  margin: 0 auto 2.2rem;
+  max-width: 34rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  line-height: 1.45;
+  color: var(--lavender-200);
+}
+.versiculo cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+[data-screen="done"] .footer__quote { margin-top: 1rem; }
+
+.paso { text-align: left; }
+.paso .quiz__question { text-align: center; margin-bottom: 0.75rem; }
+.paso__ayuda { margin: 0 auto 1.75rem; max-width: 34rem; text-align: center; color: var(--text-muted); }
+.paso__ayuda:empty { display: none; }
+.paso__cuerpo { display: grid; gap: 1rem; }
+.paso__cuerpo .quiz__options { margin: 0; }
+
+.campo span {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+  color: var(--lavender-200);
+}
+.campo span small { color: var(--text-muted); font-size: 0.8rem; }
+.campo input, .campo textarea, .campo select {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(217, 200, 255, 0.2);
+  background: rgba(18, 7, 31, 0.6);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.campo textarea { resize: vertical; min-height: 7.5rem; line-height: 1.55; }
+.campo input::placeholder, .campo textarea::placeholder { color: rgba(185, 168, 214, 0.5); }
+.campo input:focus, .campo textarea:focus, .campo select:focus {
+  outline: none;
+  border-color: var(--violet-400);
+  box-shadow: 0 0 0 3px rgba(157, 107, 255, 0.25);
+}
+.campo input[type="date"] { color-scheme: dark; }
+.campo select {
+  appearance: none;
+  padding-right: 2rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position: calc(100% - 1rem) 55%, calc(100% - 0.7rem) 55%;
+  background-size: 0.3rem 0.3rem;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.campo select:invalid { color: rgba(185, 168, 214, 0.5); }
+.campo option { background: var(--plum-900); color: var(--text); }
+.campo-fila { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 0.6rem; }
+
+/* Opciones de selección múltiple */
+.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+.chip {
+  padding: 0.7rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 200, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.chip:hover, .chip:focus-visible { outline: none; border-color: var(--violet-400); }
+.chip[aria-pressed="true"] { border-color: var(--gold); background: rgba(217, 189, 132, 0.14); color: var(--gold); }
+.chip[aria-pressed="true"]::before { content: "✦ "; }
+
+.quiz__option small { display: block; color: var(--text-muted); font-size: 0.88rem; margin-top: 0.15rem; }
+
+.paso__acciones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.paso__acciones .btn { margin-left: auto; }
+.paso .form-msg { margin-top: 0.75rem; text-align: center; }
+.paso .form-msg:empty { display: none; }
+
+@media (max-width: 480px) {
+  .paso__acciones .btn { padding: 0.95rem 1.8rem; }
+}
+
+.paso [hidden] { display: none !important; }

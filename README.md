@@ -16,7 +16,9 @@ masterclass/masterclass.js → fecha, cuenta regresiva, formulario, WhatsApp
 quiz/                    → quiz "¿Cuál es tu don?" que inscribe a la masterclass (/quiz)
 presentacion/            → presentación comercial del programa EXPANSIÓN (/presentacion)
 regalo/                  → regalo de la masterclass "La Física Cuántica del Dinero": plan de 5 días + Calendly (/regalo)
+admision/                → formulario de admisión de alumnos nuevos de Expansión (/admision)
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
+api/admision.js          → envía la admisión de Expansión a n8n, que la guarda en Notion ("Admisión Expansión · Alumnos")
 assets/                  → fotos de Laura
 ```
 

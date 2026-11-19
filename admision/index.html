@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admisión Expansión · Laura Restrepo</title>
+  <meta name="description" content="Formulario de admisión para nuevos alumnos de Expansión." />
+  <!-- Solo para alumnos nuevos: no aparece en Google -->
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1a0b2e" />
+
+  <meta property="og:title" content="Te damos la bienvenida a Expansión" />
+  <meta property="og:description" content="Tu formulario de admisión con Laura Restrepo." />
+  <meta property="og:image" content="https://expansiondonesespirituales.com/assets/laura.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/masterclass/masterclass.css" />
+  <link rel="stylesheet" href="/quiz/quiz.css" />
+  <link rel="stylesheet" href="/admision/admision.css" />
+</head>
+<body>
+  <div class="aura" aria-hidden="true">
+    <span class="orb orb--1"></span>
+    <span class="orb orb--2"></span>
+    <span class="orb orb--3"></span>
+  </div>
+
+  <header class="nav">
+    <span class="nav__logo">Expansión</span>
+  </header>
+
+  <main class="quiz">
+    <!-- BIENVENIDA -->
+    <section class="quiz__screen is-active" data-screen="intro">
+      <p class="badge">✦ Admisión · Expansión</p>
+      <h1>Te damos la bienvenida<br /><em>a tu Expansión</em></h1>
+      <p class="lead center">
+        Antes de empezar queremos conocerte de verdad: quién eres, qué don puso Dios en ti
+        y hacia dónde quieres llevarlo. Respira, pídele a Dios que guíe tus palabras
+        y responde desde el corazón.
+      </p>
+      <blockquote class="versiculo">
+        «Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová,
+        pensamientos de paz, y no de mal, para daros el fin que esperáis.»
+        <cite>Jeremías 29:11</cite>
+      </blockquote>
+      <button type="button" class="btn btn--big" data-start>Comenzar</button>
+      <p class="cta-note" data-resume hidden>Guardamos lo que ya habías respondido.</p>
+      <p class="cta-note">Unos 8 minutos · Tus respuestas son confidenciales</p>
+    </section>
+
+    <!-- PREGUNTAS (se generan desde admision.js) -->
+    <section class="quiz__screen" data-screen="question">
+      <div class="quiz__progress" aria-hidden="true"><span data-progress></span></div>
+      <p class="eyebrow" data-chapter></p>
+      <form class="paso" data-form novalidate>
+        <h2 class="quiz__question" data-question tabindex="-1"></h2>
+        <p class="paso__ayuda" data-help></p>
+        <div class="paso__cuerpo" data-body></div>
+        <p class="form-msg" data-msg role="alert"></p>
+        <div class="paso__acciones">
+          <button type="button" class="quiz__back" data-back>← Volver</button>
+          <button type="submit" class="btn" data-next>Continuar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- GRACIAS -->
+    <section class="quiz__screen" data-screen="done">
+      <p class="badge">✦ Admisión recibida</p>
+      <h1 tabindex="-1" data-done-title>Gracias,<br /><em>ya comenzó tu Expansión</em></h1>
+      <p class="lead center">
+        Tus respuestas le llegaron a Laura. Las leerá con calma antes de tu primera sesión
+        para acompañarte desde donde de verdad estás.
+      </p>
+      <blockquote class="versiculo">
+        «Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores
+        de la multiforme gracia de Dios.»
+        <cite>1 Pedro 4:10</cite>
+      </blockquote>
+      <p class="footer__quote">Dios te dio el regalo, te toca a ti monetizarlo.</p>
+    </section>
+  </main>
+
+  <script src="/admision/admision.js"></script>
+</body>
+</html>
