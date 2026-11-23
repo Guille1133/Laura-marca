@@ -4,9 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tu camino en Expansión · Laura Restrepo</title>
-  <meta name="description" content="Bienvenida a Expansión: tu mapa de 5 meses, tus 15 mentorías y tus fechas." />
-  <!-- Solo para alumnos: no aparece en Google -->
+  <meta name="description" content="Tu página personal de Expansión: tu mapa de 5 meses, tus 15 mentorías y tus fechas." />
+  <!-- Página personal de cada alumno: no aparece en Google ni pasa su link a otros sitios -->
   <meta name="robots" content="noindex" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="theme-color" content="#1a0b2e" />
 
   <meta property="og:title" content="Tu camino en Expansión" />
@@ -31,33 +32,50 @@
 
   <header class="nav">
     <a href="#inicio" class="nav__logo">Expansión</a>
-    <nav class="pres-nav" aria-label="Secciones">
+    <nav class="pres-nav" aria-label="Secciones" data-pantalla="mapa" hidden>
       <a href="#como">Cómo funciona</a>
       <a href="#mapa">Tu mapa</a>
       <a href="#fechas">Tus fechas</a>
     </nav>
   </header>
 
-  <main>
+  <!-- Mientras carga, o si el link no es de un alumno -->
+  <main class="estado-carga" data-pantalla="cargando">
+    <p class="lead" role="status">Abriendo tu mapa…</p>
+  </main>
+  <main class="estado-carga" data-pantalla="sin-link" hidden>
+    <p class="eyebrow">Expansión</p>
+    <h1>Esta página es <em>personal</em></h1>
+    <p class="lead">Cada alumno de Expansión tiene la suya. Ábrela con el link que te envió Laura; si no lo encuentras, pídeselo por WhatsApp.</p>
+  </main>
+  <main class="estado-carga" data-pantalla="error" hidden>
+    <p class="eyebrow">Expansión</p>
+    <h1>No pudimos <em>abrir tu mapa</em></h1>
+    <p class="lead">Revisa tu conexión e inténtalo de nuevo.</p>
+    <button type="button" class="btn" data-reintentar>Reintentar</button>
+  </main>
+
+  <main data-pantalla="mapa" hidden>
     <!-- PORTADA -->
     <section class="hero" id="inicio">
       <div class="hero__text reveal">
-        <p class="eyebrow">Bienvenida a Expansión</p>
+        <p class="eyebrow">Te damos la bienvenida a Expansión</p>
         <h1><span data-saludo>Tu camino</span><br /><em>empieza hoy</em></h1>
         <p class="lead">
           Durante 5 meses vas a pasar de navegante a arquitecto de tu destino: activar tus dones,
           construir tu proyecto de vida y empezar a vivir de tu propósito, con Dios como pilar.
-          Esta página es tu mapa. Vuelve a ella cada vez que la necesites.
+          Esta página es tuya: vuelve a ella cada vez que la necesites.
         </p>
         <div class="perfil">
           <label class="campo">
-            <span>Tu nombre</span>
-            <input type="text" data-perfil="nombre" placeholder="¿Cómo te llamas?" autocomplete="given-name" />
-          </label>
-          <label class="campo">
             <span>Tu meta en Expansión</span>
-            <input type="text" data-perfil="meta" placeholder="Ej.: facturar mis primeros 5.000 USD con mis sesiones" />
+            <textarea data-meta rows="3" maxlength="300" placeholder="Ej.: facturar mis primeros 5.000 USD con mis sesiones"></textarea>
           </label>
+          <p class="proxima" data-proxima hidden></p>
+        </div>
+        <div class="importar" data-importar hidden>
+          <p></p>
+          <button type="button" class="btn btn--ghost">Pasar mis fechas</button>
         </div>
       </div>
       <div class="hero__photo reveal">
@@ -141,11 +159,11 @@
       <div class="container container--narrow">
         <p class="eyebrow reveal">Tus fechas</p>
         <h2 class="reveal">Tu calendario <em>de un vistazo</em></h2>
-        <p class="lead reveal">Lo que anotes se guarda en este dispositivo. Pásalo a tu calendario o comparte el link con tus fechas.</p>
+        <p class="lead reveal">Lo que anotes se guarda solo y lo ves desde cualquier dispositivo con tu link. Las horas aparecen en tu hora local.</p>
         <div class="agenda reveal" data-agenda></div>
         <div class="agenda__acciones reveal">
           <button type="button" class="btn" data-ics>Descargar a mi calendario</button>
-          <button type="button" class="btn btn--ghost" data-compartir>Copiar link con mis fechas</button>
+          <button type="button" class="btn btn--ghost" data-compartir>Copiar mi link</button>
           <button type="button" class="btn btn--ghost" data-imprimir>Imprimir</button>
         </div>
         <p class="agenda__nota" data-aviso role="status"></p>
@@ -163,6 +181,8 @@
       </p>
     </section>
   </main>
+
+  <p class="guardado" data-guardado role="status"></p>
 
   <footer class="footer">
     <p class="footer__quote">Dios te dio el regalo, te toca a ti monetizarlo.</p>

@@ -17,9 +17,10 @@ quiz/                    → quiz "¿Cuál es tu don?" que inscribe a la masterc
 presentacion/            → presentación comercial del programa EXPANSIÓN (/presentacion)
 regalo/                  → regalo de la masterclass "La Física Cuántica del Dinero": plan de 5 días + Calendly (/regalo)
 admision/                → formulario de admisión de alumnos nuevos de Expansión (/admision)
-bienvenida/              → onboarding del alumno nuevo: mapa de 5 meses, 15 mentorías y sus fechas (/bienvenida)
+bienvenida/              → página de onboarding individual de cada alumno: mapa, mentorías y fechas (/bienvenida/<id>)
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
 api/admision.js          → envía la admisión de Expansión a n8n, que la guarda en Notion ("Admisión Expansión · Alumnos")
+api/alumno.js            → lee y guarda en Notion el mapa de cada alumno
 assets/                  → fotos de Laura
 ```
 
@@ -32,6 +33,13 @@ assets/                  → fotos de Laura
 
 Cada inscripción crea una fila en la base de Notion **Inscritos Masterclass · Laura**
 (flujo de n8n "Azul Navegante — Inscritos Masterclass"). Para Excel: en Notion, ••• → Exportar → CSV.
+
+## Onboarding individual
+
+Cada fila de la base de Notion **Admisión Expansión · Alumnos** tiene su propia página:
+`/bienvenida/<id de la fila>` (columna "Página de onboarding", se genera sola). Fechas, avances y meta
+se guardan en la columna "Mapa (no editar)" con el flujo de n8n "Azul Navegante — Página de alumno Expansión";
+"Próxima mentoría" y "Mentorías realizadas" se actualizan a la vez. El link es la llave: quien lo tenga puede editar.
 
 ## Quiz
 

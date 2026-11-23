@@ -1,6 +1,8 @@
 // Onboarding de Expansión: mapa de 5 meses, 15 mentorías y fechas.
-// Para cambiar un texto, se edita MESES / BONUS / ANTES. Lo que la persona anota
-// se guarda en su navegador; con "Copiar link con mis fechas" viaja en el link.
+// Cada alumno tiene su página: /bienvenida/<id>, donde <id> es su fila en Notion
+// "Admisión Expansión · Alumnos" (columna "Página de onboarding"). Lo que se anota
+// se guarda en esa fila con /api/alumno y lo ve cualquiera que abra ese link.
+// Para cambiar un texto del programa, se edita MESES / BONUS / ANTES.
 
 const MESES = [
   {
@@ -72,7 +74,6 @@ const BONUS = [
 ];
 
 const ANTES = [
-  ["Completa tu formulario de admisión", "/admision"],
   ["Entra a la plataforma de formación y ubica el módulo del mes 1", ""],
   ["Agenda tus 3 mentorías del primer mes y anótalas en esta página", "#mapa"],
   ["Elige un cuaderno solo para Expansión", ""],
@@ -82,46 +83,110 @@ const ANTES = [
 const DURACION_MIN = 60; // duración de cada mentoría en el calendario
 
 // ---------- Estado ----------
-const CLAVE = "bienvenida-expansion-v1";
+const ID = (location.pathname.match(/^\/bienvenida\/([0-9a-f]{32})\/?$/) || [])[1];
+const CLAVE_PENDIENTE = `expansion-pendiente-${ID}`;
+const CLAVE_VIEJA = "bienvenida-expansion-v1"; // versión anterior: se guardaba en el navegador
+const GRUPOS = ["fechas", "hechas", "antes"];
 let estado = { nombre: "", meta: "", fechas: {}, hechas: {}, antes: {} };
-try {
-  const guardado = JSON.parse(localStorage.getItem(CLAVE));
-  if (guardado) estado = { ...estado, ...guardado };
-} catch {}
+let pendiente = {}; // cambios que todavía no llegaron a Notion
 
-// Link compartido: #f=... trae nombre, meta y fechas
-function leerLink() {
+const leerLocal = (clave) => {
+  try { return JSON.parse(localStorage.getItem(clave)); } catch { return null; }
+};
+const escribirLocal = (clave, v) => {
+  try { v ? localStorage.setItem(clave, JSON.stringify(v)) : localStorage.removeItem(clave); } catch {}
+};
+const hayCambios = () => Object.keys(pendiente).length > 0;
+
+// Anota un cambio: se ve al instante y se guarda poco después.
+// cambiar("meta", texto) o cambiar("fechas", "s1", valor)
+function cambiar(campo, clave, valor) {
+  if (campo === "meta") estado.meta = pendiente.meta = clave;
+  else {
+    if (valor) estado[campo][clave] = valor;
+    else delete estado[campo][clave];
+    pendiente[campo] = { ...pendiente[campo], [clave]: valor || (campo === "fechas" ? null : false) };
+  }
+  escribirLocal(CLAVE_PENDIENTE, pendiente);
+  programarGuardado(900);
+}
+
+let temporizador;
+let guardando = false;
+function programarGuardado(ms) {
+  clearTimeout(temporizador);
+  mostrarGuardado("Guardando…");
+  temporizador = setTimeout(guardar, ms);
+}
+async function guardar() {
+  if (guardando || !hayCambios()) return;
+  guardando = true;
+  const envio = pendiente;
+  pendiente = {};
+  try {
+    const r = await fetch("/api/alumno", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: ID, cambios: envio }),
+    });
+    if (!r.ok) throw new Error(r.status);
+    escribirLocal(CLAVE_PENDIENTE, hayCambios() ? pendiente : null);
+    guardando = false;
+    if (hayCambios()) programarGuardado(300);
+    else mostrarGuardado("Guardado ✓");
+  } catch {
+    // Lo no enviado vuelve a la cola (sin pisar lo más nuevo) y se reintenta
+    const nuevo = pendiente;
+    pendiente = { ...envio, ...nuevo };
+    GRUPOS.forEach((k) => {
+      if (envio[k] || nuevo[k]) pendiente[k] = { ...envio[k], ...nuevo[k] };
+    });
+    escribirLocal(CLAVE_PENDIENTE, pendiente);
+    guardando = false;
+    mostrarGuardado("Sin guardar: reintentando…", true);
+    clearTimeout(temporizador);
+    temporizador = setTimeout(guardar, 10000);
+  }
+}
+window.addEventListener("online", guardar);
+window.addEventListener("beforeunload", (e) => {
+  if (guardando || hayCambios()) e.preventDefault();
+});
+
+function mostrarGuardado(texto, error) {
+  const el = document.querySelector("[data-guardado]");
+  el.textContent = texto;
+  el.classList.toggle("is-error", Boolean(error));
+  el.classList.add("is-visible");
+  clearTimeout(mostrarGuardado.t);
+  if (texto.startsWith("Guardado")) mostrarGuardado.t = setTimeout(() => el.classList.remove("is-visible"), 2000);
+}
+
+// Links de la versión anterior (#f=...): sus fechas quedan listas para pasarlas a la página personal
+function leerLinkViejo() {
   const m = location.hash.match(/^#f=([\w-]+)/);
   if (!m) return;
   try {
     const b64 = m[1].replace(/-/g, "+").replace(/_/g, "/");
-    const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
-    const datos = JSON.parse(new TextDecoder().decode(bytes));
-    if (datos.n) estado.nombre = String(datos.n).slice(0, 80);
-    if (datos.m) estado.meta = String(datos.m).slice(0, 200);
-    if (datos.f && typeof datos.f === "object") {
-      Object.entries(datos.f).forEach(([k, v]) => {
-        if (/^(s\d{1,2}|b\d)$/.test(k) && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(v)) estado.fechas[k] = v;
-      });
-    }
-    guardar();
+    const datos = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b64), (c) => c.charCodeAt(0))));
+    if (!leerLocal(CLAVE_VIEJA)) escribirLocal(CLAVE_VIEJA, { nombre: datos.n, meta: datos.m, fechas: datos.f });
     history.replaceState(null, "", location.pathname);
   } catch {}
 }
-function crearLink() {
-  const datos = { n: estado.nombre, m: estado.meta, f: estado.fechas };
-  const bytes = new TextEncoder().encode(JSON.stringify(datos));
-  const b64 = btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  return `${location.origin}${location.pathname}#f=${b64}`;
-}
-function guardar() {
-  try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch {}
-}
-leerLink();
 
 // ---------- Utilidades ----------
 const $ = (s) => document.querySelector(s);
 const escapar = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+// Las fechas se guardan en UTC; cada quien las ve en su hora local
+const aUTC = (local) => {
+  const d = new Date(local);
+  return isNaN(d) ? "" : d.toISOString().slice(0, 16) + "Z";
+};
+const aLocal = (v) => {
+  const d = new Date(v);
+  if (!v || isNaN(d)) return "";
+  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+};
 const fechaLarga = (v) =>
   new Date(v).toLocaleString("es", { weekday: "long", day: "numeric", month: "long", hour: "numeric", minute: "2-digit" });
 const compacta = (d) =>
@@ -156,9 +221,8 @@ function linkGoogle(s) {
 
 // ---------- Render ----------
 function htmlSesion(s) {
-  const fecha = estado.fechas[s.id] || "";
+  const fecha = aLocal(estado.fechas[s.id]);
   const hecha = Boolean(estado.hechas[s.id]);
-  const google = linkGoogle(s);
   return `<li class="sesion${hecha ? " is-hecha" : ""}" data-sesion="${s.id}">
     <div class="sesion__num" aria-hidden="true">${s.bonus ? "✦" : s.num}</div>
     <div class="sesion__info">
@@ -169,7 +233,7 @@ function htmlSesion(s) {
         <label class="campo campo--fecha"><span>Fecha y hora</span>
           <input type="datetime-local" data-fecha="${s.id}" value="${fecha}" /></label>
         <label class="check"><input type="checkbox" data-hecha="${s.id}"${hecha ? " checked" : ""} /><span>Realizada</span></label>
-        ${google ? `<a class="sesion__cal" href="${google}" target="_blank" rel="noopener">+ Google Calendar</a>` : ""}
+        <a class="sesion__cal" data-cal="${s.id}" href="${linkGoogle(s) || "#"}" target="_blank" rel="noopener"${fecha ? "" : " hidden"}>+ Google Calendar</a>
       </div>
     </div>
   </li>`;
@@ -229,10 +293,21 @@ function pintarAgenda() {
   $("[data-agenda]").innerHTML = `<ol>${filas.join("")}</ol>`;
 }
 
+// La próxima sesión con fecha, en la portada
+function pintarProxima() {
+  const limite = Date.now() - DURACION_MIN * 60000;
+  const proxima = SESIONES.filter((s) => estado.fechas[s.id] && !estado.hechas[s.id] && new Date(estado.fechas[s.id]) > limite)
+    .sort((a, b) => new Date(estado.fechas[a.id]) - new Date(estado.fechas[b.id]))[0];
+  const el = $("[data-proxima]");
+  el.hidden = !proxima;
+  if (proxima) el.innerHTML = `<span>Tu próxima sesión</span><strong>${fechaLarga(estado.fechas[proxima.id])}</strong><em>${proxima.titulo}</em>`;
+}
+
 function pintarPerfil() {
-  document.querySelectorAll("[data-perfil]").forEach((el) => (el.value = estado[el.dataset.perfil] || ""));
   const nombre = estado.nombre.trim().split(/\s+/)[0];
   $("[data-saludo]").textContent = nombre ? `${nombre}, tu camino` : "Tu camino";
+  if (nombre) document.title = `${nombre} · Tu camino en Expansión`;
+  $("[data-meta]").value = estado.meta || "";
 }
 
 function pintarAntes() {
@@ -249,40 +324,34 @@ function pintarTodo() {
   pintarProgreso();
   pintarAgenda();
   pintarAntes();
+  pintarProxima();
 }
-pintarTodo();
 
 // ---------- Eventos ----------
 document.addEventListener("input", (e) => {
-  const campo = e.target.dataset.perfil;
-  if (campo) {
-    estado[campo] = e.target.value;
-    guardar();
-    if (campo === "nombre") pintarPerfil();
-  }
+  if (e.target.matches("[data-meta]")) cambiar("meta", e.target.value.slice(0, 300));
 });
 
 document.addEventListener("change", (e) => {
   const t = e.target;
   if (t.dataset.fecha) {
-    if (t.value) estado.fechas[t.dataset.fecha] = t.value;
-    else delete estado.fechas[t.dataset.fecha];
-    guardar();
-    refrescarSesion(t.dataset.fecha);
+    cambiar("fechas", t.dataset.fecha, aUTC(t.value));
+    const s = SESIONES.find((x) => x.id === t.dataset.fecha);
+    const cal = $(`[data-cal="${s.id}"]`);
+    cal.hidden = !t.value;
+    cal.href = linkGoogle(s) || "#";
     pintarAgenda();
+    pintarProxima();
   }
   if (t.dataset.hecha) {
-    estado.hechas[t.dataset.hecha] = t.checked;
-    guardar();
+    cambiar("hechas", t.dataset.hecha, t.checked);
     refrescarSesion(t.dataset.hecha);
     pintarProgreso();
     pintarAgenda();
     pintarContadorMes(t);
+    pintarProxima();
   }
-  if (t.dataset.antesI !== undefined) {
-    estado.antes[t.dataset.antesI] = t.checked;
-    guardar();
-  }
+  if (t.dataset.antesI !== undefined) cambiar("antes", t.dataset.antesI, t.checked);
 });
 
 // Vuelve a pintar solo una sesión (sin cerrar el mes abierto)
@@ -334,10 +403,10 @@ $("[data-ics]").addEventListener("click", () => {
 });
 
 $("[data-compartir]").addEventListener("click", async () => {
-  const link = crearLink();
+  const link = location.origin + location.pathname;
   try {
     await navigator.clipboard.writeText(link);
-    aviso("Link copiado. Quien lo abra verá tu nombre, tu meta y tus fechas.");
+    aviso("Link copiado. Es personal: quien lo tenga puede ver y cambiar tus fechas.");
   } catch {
     window.prompt("Copia este link:", link);
   }
@@ -347,3 +416,62 @@ $("[data-imprimir]").addEventListener("click", () => {
   document.querySelectorAll("[data-mes]").forEach((d) => (d.open = true));
   window.print();
 });
+
+// ---------- Arranque ----------
+function pantalla(nombre) {
+  document.querySelectorAll("[data-pantalla]").forEach((el) => (el.hidden = el.dataset.pantalla !== nombre));
+}
+
+// Une sobre el mapa los cambios que quedaron sin enviar en este dispositivo
+function aplicarPendiente() {
+  pendiente = leerLocal(CLAVE_PENDIENTE) || {};
+  if (typeof pendiente.meta === "string") estado.meta = pendiente.meta;
+  GRUPOS.forEach((k) =>
+    Object.entries(pendiente[k] || {}).forEach(([c, v]) => {
+      if (v) estado[k][c] = v;
+      else delete estado[k][c];
+    })
+  );
+}
+
+// Fechas anotadas en este dispositivo con la versión anterior
+function ofrecerFechasViejas() {
+  const viejo = leerLocal(CLAVE_VIEJA);
+  const fechas = Object.entries(viejo?.fechas || {}).filter(([k, v]) => SESIONES.some((s) => s.id === k) && aUTC(v));
+  if (!fechas.length || Object.keys(estado.fechas).length) return;
+  const caja = $("[data-importar]");
+  const cuantas = fechas.length === 1 ? "1 fecha anotada" : `${fechas.length} fechas anotadas`;
+  caja.hidden = false;
+  caja.querySelector("p").textContent = `En este dispositivo hay ${cuantas}${viejo.nombre ? ` a nombre de ${viejo.nombre}` : ""}. ¿Pasarlas a esta página?`;
+  caja.querySelector("button").addEventListener("click", () => {
+    fechas.forEach(([k, v]) => cambiar("fechas", k, aUTC(v)));
+    Object.entries(viejo.hechas || {}).forEach(([k, v]) => v && SESIONES.some((s) => s.id === k) && cambiar("hechas", k, true));
+    escribirLocal(CLAVE_VIEJA, null);
+    caja.hidden = true;
+    pintarTodo();
+  });
+}
+
+async function cargar() {
+  pantalla("cargando");
+  try {
+    const r = await fetch(`/api/alumno?id=${ID}`);
+    if (r.status === 404 || r.status === 400) return pantalla("sin-link");
+    if (!r.ok) throw new Error(r.status);
+    const datos = await r.json();
+    estado = { ...estado, ...datos };
+    aplicarPendiente();
+    pintarTodo();
+    pantalla("mapa");
+    if (hayCambios()) programarGuardado(0);
+    ofrecerFechasViejas();
+    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+  } catch {
+    pantalla("error");
+  }
+}
+$("[data-reintentar]").addEventListener("click", cargar);
+
+leerLinkViejo();
+if (ID) cargar();
+else pantalla("sin-link");
