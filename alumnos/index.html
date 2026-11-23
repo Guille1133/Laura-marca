@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Links de alumnos · Expansión</title>
+  <!-- Página interna con clave: no aparece en Google -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="theme-color" content="#1a0b2e" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/alumnos/alumnos.css" />
+</head>
+<body>
+  <header class="nav">
+    <span class="nav__logo">Expansión</span>
+    <button type="button" class="texto" data-salir hidden>Salir</button>
+  </header>
+
+  <main class="pagina">
+    <p data-cargando role="status">Cargando…</p>
+
+    <form class="entrada" data-entrada hidden>
+      <h1>Links de <em>tus alumnos</em></h1>
+      <label class="campo"><span>Clave</span>
+        <input type="password" data-clave autocomplete="current-password" required /></label>
+      <button class="btn" data-entrar>Entrar</button>
+      <p class="error" data-error role="alert"></p>
+    </form>
+
+    <section data-panel hidden>
+      <h1>Links de <em>tus alumnos</em></h1>
+      <p class="lead">Cada persona que llena la admisión aparece aquí con su página de onboarding. Envíale el link por WhatsApp o cópialo.</p>
+      <div class="barra">
+        <label class="campo"><span>Buscar por nombre</span>
+          <input type="search" data-buscar placeholder="Escribe un nombre" /></label>
+        <button type="button" class="texto" data-actualizar>Actualizar lista</button>
+      </div>
+      <p class="conteo" data-conteo role="status"></p>
+      <ul class="lista" data-lista></ul>
+    </section>
+  </main>
+
+  <script src="/alumnos/alumnos.js"></script>
+</body>
+</html>

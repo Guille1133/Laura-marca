@@ -102,3 +102,7 @@
 }
 
 .paso [hidden] { display: none !important; }
+
+.tu-pagina { display: grid; justify-items: center; gap: 0.9rem; margin: 0 auto 2.5rem; max-width: 34rem; }
+.tu-pagina p { margin: 0; }
+.tu-pagina[hidden] { display: none; }

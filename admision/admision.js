@@ -335,6 +335,22 @@ form.addEventListener("submit", (e) => {
   avanzar();
 });
 
+// Link a la página de onboarding que se crea con la admisión
+function mostrarPagina(id) {
+  const link = `${location.origin}/bienvenida/${id}`;
+  const copiar = $("[data-pagina-copiar]");
+  $("[data-pagina-link]").href = link;
+  copiar.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+      copiar.textContent = "Link copiado ✓";
+    } catch {
+      window.prompt("Copia este link:", link);
+    }
+  });
+  $("[data-pagina]").hidden = false;
+}
+
 let enviando = false;
 async function avanzar() {
   const error = validar(PASOS[paso]);
@@ -363,7 +379,9 @@ async function avanzar() {
       body: JSON.stringify(envio),
     });
     if (!res.ok) throw new Error(await res.text());
+    const { id } = await res.json().catch(() => ({}));
     borrar();
+    if (id) mostrarPagina(id);
     const nombre = String(datos.name || "").trim().split(/\s+/)[0];
     $("[data-done-title]").innerHTML = `Gracias${nombre ? `, ${escapar(nombre)}` : ""}.<br /><em>Ya comenzó tu Expansión</em>`;
     $("[data-progress]").style.width = "100%";

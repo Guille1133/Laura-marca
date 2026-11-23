@@ -47,5 +47,7 @@ module.exports = async (req, res) => {
     return res.status(502).send("No se pudo enviar");
   }
 
-  return res.status(200).json({ ok: true });
+  // El id de la fila en Notion es el link de la página de onboarding del alumno (/bienvenida/<id>)
+  const { id } = await response.json().catch(() => ({}));
+  return res.status(200).json({ ok: true, ...(/^[0-9a-f]{32}$/.test(id) && { id }) });
 };

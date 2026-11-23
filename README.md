@@ -21,6 +21,7 @@ bienvenida/              → página de onboarding individual de cada alumno: ma
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
 api/admision.js          → envía la admisión de Expansión a n8n, que la guarda en Notion ("Admisión Expansión · Alumnos")
 api/alumno.js            → lee y guarda en Notion el mapa de cada alumno
+alumnos/ y api/alumnos.js → lista con clave de los links de onboarding, para Laura (/alumnos)
 assets/                  → fotos de Laura
 ```
 
@@ -40,6 +41,9 @@ Cada fila de la base de Notion **Admisión Expansión · Alumnos** tiene su prop
 `/bienvenida/<id de la fila>` (columna "Página de onboarding", se genera sola). Fechas, avances y meta
 se guardan en la columna "Mapa (no editar)" con el flujo de n8n "Azul Navegante — Página de alumno Expansión";
 "Próxima mentoría" y "Mentorías realizadas" se actualizan a la vez. El link es la llave: quien lo tenga puede editar.
+
+El alumno recibe su link al terminar la admisión y Laura los tiene todos en `/alumnos`, con clave
+(variables `EQUIPO_CLAVE` y `NOTION_TOKEN` en Vercel).
 
 ## Quiz
 

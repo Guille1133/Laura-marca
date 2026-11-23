@@ -1,0 +1,60 @@
+/* Links de alumnos (/alumnos). Reutiliza /styles.css */
+[hidden] { display: none !important; }
+
+.pagina { max-width: 52rem; min-height: 100vh; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem); }
+.pagina h1 { margin: 0 0 0.75rem; }
+.pagina .lead { margin: 0 0 2rem; }
+.error { min-height: 1.4em; margin: 0; color: #ffc7b8; }
+.texto { padding: 0.5rem 0; border: 0; background: none; color: var(--lavender-200); font: inherit; cursor: pointer; border-bottom: 1px solid var(--gold); }
+.texto:hover { color: var(--gold); }
+.texto:focus-visible, .accion:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.campo { display: block; flex: 1; }
+.campo span { display: block; margin-bottom: 0.35rem; font-size: 0.85rem; color: var(--lavender-200); }
+.campo input {
+  width: 100%;
+  padding: 0.85rem 1.05rem;
+  border-radius: 12px;
+  border: 1px solid rgba(217, 200, 255, 0.2);
+  background: rgba(18, 7, 31, 0.6);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  color-scheme: dark;
+}
+.campo input:focus { outline: none; border-color: var(--violet-400); box-shadow: 0 0 0 3px rgba(157, 107, 255, 0.25); }
+
+.entrada { display: grid; gap: 1rem; max-width: 24rem; margin: 8vh auto 0; }
+.entrada .btn { border: 0; cursor: pointer; font: inherit; }
+.entrada .btn[disabled] { opacity: 0.6; cursor: wait; }
+
+.barra { display: flex; align-items: flex-end; gap: 1.5rem; }
+.conteo { margin: 1rem 0; color: var(--text-muted); font-size: 0.95rem; }
+
+.lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(217, 200, 255, 0.15); }
+.alumno { padding: 1.25rem 0; border-bottom: 1px solid rgba(217, 200, 255, 0.15); }
+.alumno h2 { margin: 0; font-size: 1.6rem; overflow-wrap: anywhere; }
+.alumno__datos { margin: 0.2rem 0 0.9rem; color: var(--text-muted); font-size: 0.95rem; }
+.alumno__datos span + span::before { content: " · "; color: var(--gold); }
+.acciones { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.accion {
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.accion:hover { background: rgba(217, 189, 132, 0.14); }
+.accion--principal { border-color: transparent; background: linear-gradient(135deg, var(--violet-500), #b43fe4); color: #fff; }
+.accion--principal:hover { background: linear-gradient(135deg, var(--violet-400), #b43fe4); }
+
+@media (max-width: 560px) {
+  .barra { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .barra .texto { align-self: flex-start; }
+  .acciones .accion { flex: 1 1 40%; text-align: center; }
+  .acciones .accion--principal { flex-basis: 100%; }
+}
