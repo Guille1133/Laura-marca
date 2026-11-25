@@ -101,6 +101,12 @@ h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
 .opciones label:hover span { background: var(--niebla); }
 .opciones input:checked + span { border-color: var(--mar); background: var(--mar); color: #fff; }
 .opciones input:focus-visible + span { outline: 2px solid var(--oro); outline-offset: 2px; }
+.opciones--orden span { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 3.4rem; padding-block: 0.6rem; }
+.opciones--orden b { flex: none; display: grid; place-content: center; width: 1.85rem; height: 1.85rem; border-radius: 50%; background: var(--oro-claro); color: var(--abismo); font-weight: 700; line-height: 1; }
+.opciones--orden b:empty { background: none; border: 1px dashed var(--borde); }
+.opciones--orden input:disabled { cursor: default; }
+.opciones--orden label:has(input:disabled) { opacity: 0.5; cursor: default; }
+.opciones--orden label:has(input:disabled):hover span { background: #fff; }
 
 .nivel span { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; }
 .nivel output { font-family: var(--titulos); font-size: 1.6rem; line-height: 1.2; font-weight: 400; color: var(--mar); }

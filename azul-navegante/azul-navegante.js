@@ -27,8 +27,9 @@ const PASOS = [
     campos: [{ key: "patron", tipo: "textarea", label: "Lo que se repite" }],
   },
   {
-    titulo: "¿Qué área quieres priorizar?",
-    campos: [{ key: "area", tipo: "opciones", items: ["Identidad", "Emociones", "Creencias", "Propósito", "Relaciones", "Dinero"] }],
+    titulo: "¿Qué áreas de tu vida quieres priorizar?",
+    ayuda: "Elige hasta 3, empezando por la más importante. Si cambias de idea, toca de nuevo para quitarla.",
+    campos: [{ key: "area", tipo: "orden", max: 3, items: ["Identidad", "Emociones", "Creencias", "Propósito", "Relaciones", "Dinero"] }],
   },
   {
     titulo: "¿Qué cambio te gustaría reconocer en ti al terminar este primer ciclo?",
@@ -84,6 +85,7 @@ try {
   const b = JSON.parse(localStorage.getItem(BORRADOR));
   if (b?.datos) {
     datos = b.datos;
+    if (typeof datos.area === "string") datos.area = [datos.area]; // borradores de cuando se elegía una sola
     paso = Math.min(Number(b.paso) || 0, PASOS.length - 1);
   }
 } catch {}
@@ -114,6 +116,10 @@ function htmlCampo(c) {
       return `<fieldset class="grupo"><legend${c.label ? "" : " hidden"}>${c.label || ""}</legend><div class="opciones">${c.items
         .map((i) => `<label><input type="radio" name="${c.key}" data-key="${c.key}" value="${i}"${v === i ? " checked" : ""} /><span>${i}</span></label>`)
         .join("")}</div></fieldset>`;
+    case "orden":
+      return `<fieldset class="grupo"><legend hidden>Áreas</legend><div class="opciones opciones--orden" data-orden="${c.key}" data-max="${c.max}">${c.items
+        .map((i) => `<label><input type="checkbox" value="${i}" /><span>${i}<b></b></span></label>`)
+        .join("")}</div></fieldset>`;
     case "nivel":
       return `<label class="nivel${v === undefined ? " is-vacio" : ""}"><span>${c.label} <output>${v ?? "–"}</output></span>
         <input type="range" min="0" max="10" step="1" value="${v ?? 5}" data-nivel="${c.key}" /></label>`;
@@ -135,6 +141,7 @@ function mostrarPaso(i) {
   $("[data-ayuda]").textContent = p.ayuda || "";
   $("[data-error]").textContent = "";
   $("[data-cuerpo]").innerHTML = p.campos.map(htmlCampo).join("");
+  document.querySelectorAll("[data-orden]").forEach(pintarOrden);
   $("[data-volver]").hidden = i === 0;
   $("[data-seguir]").textContent = i === PASOS.length - 1 ? "Enviar" : "Continuar";
   pantalla("pregunta");
@@ -154,6 +161,8 @@ function validar(p) {
       if (String(datos.numero || "").replace(/\D/g, "").length < 7) return "Revisa tu número de WhatsApp.";
     } else if (c.tipo === "opciones") {
       if (!v) return "Elige una opción.";
+    } else if (c.tipo === "orden") {
+      if (!v?.length) return "Elige al menos una.";
     } else if (c.tipo === "nivel") {
       if (v === undefined) return `Mueve la barra de ${c.label.toLowerCase()}.`;
     } else if (c.tipo === "check") {
@@ -171,6 +180,8 @@ form.addEventListener("input", (e) => {
   if (t.dataset.key) datos[t.dataset.key] = t.value;
   if (t.dataset.check) datos[t.dataset.check] = t.checked;
   if (t.dataset.nivel) ponerNivel(t);
+  const orden = t.closest("[data-orden]");
+  if (orden) ponerOrden(orden, t);
   $("[data-error]").textContent = "";
   guardar();
 });
@@ -184,6 +195,23 @@ function ponerNivel(t) {
   caja.classList.remove("is-vacio");
   caja.querySelector("output").textContent = t.value;
   guardar();
+}
+
+// Lista con prioridad: cada toque suma al final; al quitar una, las demás suben
+function ponerOrden(caja, t) {
+  const elegidas = (datos[caja.dataset.orden] || []).filter((i) => i !== t.value);
+  if (t.checked) elegidas.push(t.value);
+  datos[caja.dataset.orden] = elegidas.slice(0, Number(caja.dataset.max));
+  pintarOrden(caja);
+}
+function pintarOrden(caja) {
+  const elegidas = datos[caja.dataset.orden] || [];
+  caja.querySelectorAll("input").forEach((t) => {
+    const n = elegidas.indexOf(t.value) + 1;
+    t.checked = n > 0;
+    t.disabled = !n && elegidas.length >= Number(caja.dataset.max);
+    t.nextElementSibling.querySelector("b").textContent = n || "";
+  });
 }
 
 $("[data-empezar]").addEventListener("click", () => mostrarPaso(paso));

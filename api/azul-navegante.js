@@ -45,11 +45,15 @@ module.exports = async (req, res) => {
   const niveles = ESCALA.filter((k) => Number.isInteger(b[k]) && b[k] >= 0 && b[k] <= 10)
     .map((k) => `${k[0].toUpperCase()}${k.slice(1)} ${b[k]}`)
     .join(" · ");
+  // Hasta 3 áreas en orden de prioridad, sin repetir (antes llegaba una sola, como texto)
+  const areas = [...new Set([].concat(b.area ?? []))].filter((a) => AREAS.includes(a)).slice(0, 3);
   const properties = {
     Nombre: { title: [{ text: { content: texto(b.nombre, 120) } }] },
     "Correo de compra": { email: texto(b.correo, 200) },
     WhatsApp: { phone_number: texto(b.celular, 40) },
-    "Área a priorizar": opcion(b.area, AREAS),
+    "Área a priorizar": opcion(areas[0], AREAS),
+    "Segunda área": opcion(areas[1], AREAS),
+    "Tercera área": opcion(areas[2], AREAS),
     "Tiempo diario": opcion(b.tiempo, TIEMPOS),
     "Punto de partida 0–10": rico(niveles),
     "Aceptó uso de datos": { date: { start: new Date().toISOString() } },
