@@ -18,10 +18,12 @@ presentacion/            → presentación comercial del programa EXPANSIÓN (/p
 regalo/                  → regalo de la masterclass "La Física Cuántica del Dinero": plan de 5 días + Calendly (/regalo)
 admision/                → formulario de admisión de alumnos nuevos de Expansión (/admision)
 bienvenida/              → página de onboarding individual de cada alumno: mapa, mentorías y fechas (/bienvenida/<id>)
+azul-navegante/          → formulario de onboarding de Azul Navegante (/azul-navegante)
 api/registro.js          → envía los inscritos a n8n, que los guarda en Notion
 api/admision.js          → envía la admisión de Expansión a n8n, que la guarda en Notion ("Admisión Expansión · Alumnos")
 api/alumno.js            → lee y guarda en Notion el mapa de cada alumno
 alumnos/ y api/alumnos.js → lista con clave de los links de onboarding, para Laura (/alumnos)
+api/azul-navegante.js    → guarda en Notion cada formulario de Azul Navegante
 assets/                  → fotos de Laura
 ```
 
@@ -44,6 +46,13 @@ se guardan en la columna "Mapa (no editar)" con el flujo de n8n "Azul Navegante 
 
 El alumno recibe su link al terminar la admisión y Laura los tiene todos en `/alumnos`, con clave
 (variables `EQUIPO_CLAVE` y `NOTION_TOKEN` en Vercel).
+
+## Azul Navegante
+
+`/azul-navegante` es el formulario de onboarding que se envía después de la compra: una pregunta por pantalla, con
+borrador en el navegador. Al enviarlo, `/api/azul-navegante` crea la fila en la base de Notion
+**Azul Navegante · Participantes** (dentro de "Equipo Laura") con `NOTION_TOKEN`, sin n8n.
+Las preguntas se editan en `PASOS` (`azul-navegante/azul-navegante.js`); cada respuesta nueva necesita su columna en la API.
 
 ## Quiz
 

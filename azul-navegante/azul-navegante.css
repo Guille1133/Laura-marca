@@ -1,0 +1,129 @@
+/* Onboarding de Azul Navegante: espuma, verde mar, dorado y la foto de la ola */
+:root {
+  --espuma: #f9fbfa;
+  --niebla: #e8efec;
+  --borde: #a9bdb6;
+  --tinta: #263c39;
+  --suave: #566561;
+  --mar: #4c736f;
+  --mar-hondo: #35544f;
+  --abismo: #122929;
+  --oro: #b39654;
+  --oro-claro: #e3cf9c;
+  --error: #9c3a26;
+
+  --titulos: "Gilda Display", "Palatino Linotype", Palatino, Georgia, serif;
+  --texto: "Mulish", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --foto: url("/assets/azul-navegante-mar.jpg");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--espuma); color: var(--tinta); font: 400 1.0625rem/1.6 var(--texto); }
+h1, h2, p { margin: 0; }
+h1, h2 { font-family: var(--titulos); font-weight: 400; line-height: 1.15; text-wrap: balance; }
+h1:focus, h2:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--oro); outline-offset: 3px; }
+
+/* ---------- Bienvenida y gracias ---------- */
+.mar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 3rem clamp(1.4rem, 9vw, 8rem);
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgba(18, 41, 41, 0.88), rgba(18, 41, 41, 0.55) 55%, rgba(18, 41, 41, 0.12)),
+    var(--abismo) var(--foto) center / cover;
+}
+.marca { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.mar h1 { margin-top: 1.25rem; font-size: clamp(2.8rem, 8vw, 5.25rem); overflow-wrap: anywhere; }
+.frase { margin-top: 0.9rem; font-family: var(--titulos); font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.3; color: var(--oro-claro); }
+.texto { max-width: 31rem; margin-top: 1.25rem; }
+.mar .btn { margin-top: 2.25rem; }
+.nota { margin-top: 0.9rem; font-size: 0.92rem; }
+
+.btn {
+  padding: 0.9rem 2rem;
+  border: 1px solid var(--mar);
+  border-radius: 4px;
+  background: var(--mar);
+  color: #fff;
+  font: 600 1.05rem/1.3 var(--texto);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover { background: var(--mar-hondo); }
+.btn:disabled { opacity: 0.6; cursor: default; }
+.btn--claro { border-color: var(--espuma); background: var(--espuma); color: var(--mar-hondo); }
+.btn--claro:hover { background: var(--niebla); }
+
+/* ---------- Preguntas ---------- */
+.pregunta { display: grid; grid-template-columns: minmax(0, 34%) minmax(0, 1fr); min-height: 100vh; min-height: 100svh; }
+.pregunta__mar { position: sticky; top: 0; height: 100vh; background: linear-gradient(rgba(18, 41, 41, 0.15), rgba(18, 41, 41, 0.35)), var(--foto) 42% center / cover; }
+.pregunta__hoja { display: flex; flex-direction: column; justify-content: center; width: 100%; max-width: 46rem; margin-inline: auto; padding: 2.5rem clamp(1.25rem, 5vw, 4rem); }
+.avance { height: 3px; background: #cfdcd7; }
+.avance span { display: block; width: 0; height: 100%; background: var(--oro); transition: width 0.4s ease; }
+.paso { margin-top: 0.8rem; color: var(--suave); font-size: 0.92rem; }
+form { margin-top: 2rem; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+.ayuda { margin-top: 0.7rem; color: var(--suave); }
+.ayuda:empty { display: none; }
+.cuerpo { display: grid; gap: 1.2rem; margin-top: 1.75rem; }
+
+.campo { display: block; min-width: 0; }
+.campo > span, .grupo > legend { display: block; margin-bottom: 0.4rem; padding: 0; font-weight: 600; font-size: 0.98rem; line-height: 1.4; }
+.campo small { color: var(--suave); font-weight: 400; font-size: 0.9rem; }
+.campo input, .campo select, .campo textarea {
+  display: block;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--tinta);
+  font: 400 1rem/1.5 var(--texto);
+}
+.campo textarea { min-height: 8.5rem; resize: vertical; }
+.campo ::placeholder { color: #6f807b; opacity: 1; }
+.campo :is(input, select, textarea):focus { outline: 2px solid var(--mar); outline-offset: -1px; border-color: var(--mar); }
+.fila { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr); gap: 0.75rem; }
+
+.grupo { margin: 0; padding: 0; border: 0; min-width: 0; }
+.opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.65rem; }
+.opciones label { position: relative; cursor: pointer; }
+.opciones input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.opciones span { display: block; padding: 0.85rem 1.1rem; border: 1px solid var(--borde); border-radius: 4px; background: #fff; transition: background 0.2s; }
+.opciones label:hover span { background: var(--niebla); }
+.opciones input:checked + span { border-color: var(--mar); background: var(--mar); color: #fff; }
+.opciones input:focus-visible + span { outline: 2px solid var(--oro); outline-offset: 2px; }
+
+.nivel span { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; }
+.nivel output { font-family: var(--titulos); font-size: 1.6rem; line-height: 1.2; font-weight: 400; color: var(--mar); }
+.nivel input { display: block; width: 100%; height: 1.75rem; margin: 0; accent-color: var(--mar); cursor: pointer; }
+.nivel.is-vacio input { opacity: 0.45; }
+
+.check { display: flex; gap: 0.75rem; align-items: flex-start; margin-top: 0.5rem; padding-top: 1.4rem; border-top: 1px solid #cfdcd7; cursor: pointer; }
+.check input { flex: none; width: 1.3rem; height: 1.3rem; margin: 0.15rem 0 0; accent-color: var(--mar); cursor: pointer; }
+.check span { color: var(--suave); font-size: 0.95rem; line-height: 1.5; }
+.trampa { position: absolute; left: -9999px; }
+
+.error { margin-top: 1rem; color: var(--error); font-weight: 600; }
+.error:empty { display: none; }
+.acciones { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+.acciones .btn { margin-left: auto; }
+.volver { padding: 0.75rem 0; border: 0; background: none; color: var(--mar-hondo); font: 600 1rem/1.3 var(--texto); text-decoration: underline; text-decoration-color: var(--oro); text-underline-offset: 4px; cursor: pointer; }
+
+@media (max-width: 860px) {
+  .mar { background-image: linear-gradient(rgba(18, 41, 41, 0.72), rgba(18, 41, 41, 0.6)), var(--foto); }
+  .pregunta { grid-template-columns: minmax(0, 1fr); grid-template-rows: 5.5rem 1fr; }
+  .pregunta__mar { position: static; height: auto; background-position: center 45%; }
+  .pregunta__hoja { justify-content: flex-start; padding-block: 1.5rem 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

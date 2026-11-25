@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bienvenida · Azul Navegante</title>
+  <meta name="description" content="Formulario de bienvenida de Azul Navegante, con Laura Restrepo." />
+  <!-- Solo para participantes: no aparece en Google -->
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#122929" />
+
+  <meta property="og:title" content="Azul Navegante" />
+  <meta property="og:description" content="Tu bienvenida al programa, con Laura Restrepo." />
+  <meta property="og:image" content="https://expansiondonesespirituales.com/assets/azul-navegante-mar.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/azul-navegante/azul-navegante.css" />
+</head>
+<body>
+  <!-- BIENVENIDA -->
+  <main class="mar" data-pantalla="inicio">
+    <p class="marca">Laura Restrepo / Azul Navegante</p>
+    <h1>Azul Navegante</h1>
+    <p class="frase">Dejar de sobrevivir para empezar a crear.</p>
+    <p class="texto">Te doy la bienvenida. Antes de empezar quiero conocer tu punto de partida, para acompañarte desde ahí.</p>
+    <button type="button" class="btn btn--claro" data-empezar>Comenzar</button>
+    <p class="nota">Unos 5 minutos <span data-borrador hidden>· Guardamos lo que ya habías respondido</span></p>
+  </main>
+
+  <!-- PREGUNTAS (se generan desde azul-navegante.js) -->
+  <main class="pregunta" data-pantalla="pregunta" hidden>
+    <div class="pregunta__mar" aria-hidden="true"></div>
+    <div class="pregunta__hoja">
+      <div class="avance" role="progressbar" aria-label="Avance" aria-valuemin="0"><span></span></div>
+      <p class="paso" data-paso></p>
+      <form data-form novalidate>
+        <h2 data-titulo tabindex="-1"></h2>
+        <p class="ayuda" data-ayuda></p>
+        <div class="cuerpo" data-cuerpo></div>
+        <label class="trampa" aria-hidden="true">Web<input name="web" tabindex="-1" autocomplete="off" /></label>
+        <p class="error" data-error role="alert"></p>
+        <div class="acciones">
+          <button type="button" class="volver" data-volver>Volver</button>
+          <button type="submit" class="btn" data-seguir>Continuar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- GRACIAS -->
+  <main class="mar" data-pantalla="gracias" hidden>
+    <p class="marca">Laura Restrepo / Azul Navegante</p>
+    <h1 data-gracias tabindex="-1">Gracias</h1>
+    <p class="frase">Tu travesía empieza aquí.</p>
+    <p class="texto">Ya recibí tus respuestas. Las voy a leer para acompañarte desde donde estás.</p>
+  </main>
+
+  <script src="/azul-navegante/azul-navegante.js"></script>
+</body>
+</html>
