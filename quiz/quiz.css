@@ -100,7 +100,7 @@
 .chain .step h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
 .chain .step p { font-size: 0.95rem; }
 
-/* Masterclass como solución */
+/* Llamada con Laura como siguiente paso */
 .quiz__bridge {
   margin: 0 0 1.5rem;
   font-family: var(--font-display);
@@ -145,28 +145,7 @@
 }
 .mc-card__copy { color: var(--lavender-200); max-width: 32rem; margin: 0 auto 1.75rem; }
 
-.mc-card__date {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 1rem 1.75rem;
-  margin-bottom: 1.5rem;
-  border-radius: 18px;
-  background: var(--gold);
-  color: var(--plum-950);
-  box-shadow: 0 12px 40px -12px rgba(217, 189, 132, 0.8);
-}
-.mc-card__day {
-  font-family: var(--font-display);
-  font-size: clamp(1.7rem, 5vw, 2.3rem);
-  font-weight: 600;
-  line-height: 1.1;
-}
-.mc-card__time { font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em; }
-
-.mc-card__countdown { justify-content: center; margin-bottom: 1.75rem; }
 .mc-card__note { color: var(--text-muted); font-size: 0.95rem; margin: 0 0 0.5rem; }
-.mc-card__note strong { color: var(--text); font-weight: 500; }
 
 .btn--big {
   padding: 1.25rem 3rem;

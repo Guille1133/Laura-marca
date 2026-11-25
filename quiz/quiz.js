@@ -1,7 +1,7 @@
 // Quiz "¿Cuál es tu don espiritual?"
 // Las 3 primeras preguntas revelan el don. Las demás perfilan a la persona
 // (etapa con su don, creencia sobre cobrar, consciencia, ocupación, ingresos e
-// inversión) y viajan con el registro a la masterclass.
+// inversión) y viajan con el registro. Al final invita a agendar la llamada con Laura.
 {
   const DONES = {
     sanacion: {
@@ -131,10 +131,10 @@
   ];
 
   const PUENTES = [
-    "Si cobrar por tu don te genera ruido, no estás sola ni solo. En la masterclass vas a ver por qué recibir también es parte de tu propósito.",
-    "Ya sientes que es posible. Lo que falta es el cómo, y eso es justo lo que Laura va a enseñarte en la masterclass.",
-    "Ya recibiste dinero por tu don: esa es la señal. En la masterclass verás cómo convertir eso en ingresos constantes.",
-    "Quieres que tu don sea tu principal fuente de ingresos. En la masterclass verás el camino para lograrlo.",
+    "Si cobrar por tu don te genera ruido, no estás sola ni solo. En la llamada, Laura te ayuda a ver por qué recibir también es parte de tu propósito.",
+    "Ya sientes que es posible. Lo que falta es el cómo, y eso es justo lo que vas a ver con Laura en la llamada.",
+    "Ya recibiste dinero por tu don: esa es la señal. En la llamada verás con Laura cómo convertir eso en ingresos constantes.",
+    "Quieres que tu don sea tu principal fuente de ingresos. En la llamada, Laura te muestra el camino para lograrlo.",
   ];
 
   const screens = Object.fromEntries(
@@ -143,6 +143,7 @@
   const preguntas = PASOS;
   const respuestas = {}; // id → índice de la opción
   let paso = 0;
+  let avance; // temporizador: un solo avance pendiente, aunque toquen dos veces
 
   const show = (name, focus) => {
     Object.values(screens).forEach((el) => el.classList.remove("is-active"));
@@ -171,8 +172,10 @@
       if (respuestas[actual.id] === i) btn.classList.add("is-selected");
       btn.addEventListener("click", () => {
         respuestas[actual.id] = i;
+        opciones.querySelectorAll(".is-selected").forEach((el) => el.classList.remove("is-selected"));
         btn.classList.add("is-selected");
-        setTimeout(() => { paso++; render(); }, 280);
+        clearTimeout(avance);
+        avance = setTimeout(() => { paso++; render(); }, 280);
       });
       opciones.append(btn);
     });
@@ -183,6 +186,7 @@
 
   screens.intro.querySelector("[data-start]").addEventListener("click", render);
   screens.question.querySelector("[data-back]").addEventListener("click", () => {
+    clearTimeout(avance);
     paso--;
     render();
   });
@@ -261,6 +265,9 @@
       btnQuiz.textContent = "Ver mi resultado";
     }
   });
+
+  // Mismo Calendly de la landing (CALENDLY_URL en /script.js)
+  screens.result.querySelector("[data-agendar]").href = CALENDLY_URL;
 
   const mostrarResultado = (nombre, don) => {
     const r = screens.result;

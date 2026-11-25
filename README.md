@@ -13,7 +13,7 @@ script.js                → animaciones al hacer scroll + Calendly
 masterclass/index.html   → página de captura de la masterclass (/masterclass)
 masterclass/gracias.html → página de gracias (/masterclass/gracias)
 masterclass/masterclass.js → fecha, cuenta regresiva, formulario, WhatsApp
-quiz/                    → quiz "¿Cuál es tu don?" que inscribe a la masterclass (/quiz)
+quiz/                    → quiz "¿Cuál es tu don?" que invita a agendar la llamada con Laura (/quiz)
 presentacion/            → presentación comercial del programa EXPANSIÓN (/presentacion)
 regalo/                  → regalo de la masterclass "La Física Cuántica del Dinero": plan de 5 días + Calendly (/regalo)
 admision/                → formulario de admisión de alumnos nuevos de Expansión (/admision)
@@ -56,8 +56,8 @@ Las preguntas se editan en `PASOS` (`azul-navegante/azul-navegante.js`); cada re
 
 ## Quiz
 
-`/quiz` revela el don de la persona (sanación, visión, canalización o guía) y la inscribe
-a la masterclass con el mismo `/api/registro`. Además de nombre, correo y WhatsApp envía a n8n
+`/quiz` revela el don de la persona (sanación, visión, canalización o guía) y la invita
+a agendar la llamada (Calendly). Registra sus datos con `/api/registro`: además de nombre, correo y WhatsApp envía a n8n
 `source: "quiz"` y los campos `quiz_don`, `quiz_prioridad` (Alta/Media/Baja), `quiz_etapa`,
 `quiz_monetizar`, `quiz_consciencia`, `quiz_ocupacion`, `quiz_ingresos` y `quiz_inversion`.
 Las preguntas y textos están en `quiz/quiz.js`.
