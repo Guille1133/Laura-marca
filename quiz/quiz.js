@@ -258,6 +258,7 @@
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error(await res.text());
+      persona = { name: data.name.trim(), email: data.email.trim() };
       mostrarResultado(data.name.trim().split(/\s+/)[0], don);
     } catch {
       msgQuiz.textContent = "No pudimos guardar tus datos. Inténtalo de nuevo en un momento.";
@@ -266,8 +267,45 @@
     }
   });
 
-  // Mismo Calendly de la landing (CALENDLY_URL en /script.js)
-  screens.result.querySelector("[data-agendar]").href = CALENDLY_URL;
+  // Mismo Calendly de la landing (CALENDLY_URL en /script.js). Se abre dentro de esta página,
+  // con el nombre y el correo ya completados; el link queda por si el calendario no carga.
+  const agendar = screens.result.querySelector("[data-agendar]");
+  const calendario = screens.result.querySelector("[data-calendario]");
+  agendar.href = CALENDLY_URL;
+  let persona = {};
+  let calendarioAbierto = false;
+
+  const cargarCalendly = () =>
+    window.Calendly
+      ? Promise.resolve()
+      : new Promise((ok, falla) => {
+          const s = document.createElement("script");
+          s.src = "https://assets.calendly.com/assets/external/widget.js";
+          s.onload = ok;
+          s.onerror = falla;
+          document.body.append(s);
+          setTimeout(falla, 10000);
+        });
+
+  agendar.addEventListener("click", async (e) => {
+    e.preventDefault();
+    calendario.hidden = false;
+    calendario.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    calendario.focus({ preventScroll: true });
+    if (calendarioAbierto) return;
+    try {
+      await cargarCalendly();
+      calendario.innerHTML = "";
+      Calendly.initInlineWidget({
+        url: `${CALENDLY_URL}?hide_gdpr_banner=1&background_color=fbf8ff&primary_color=7b3fe4`,
+        parentElement: calendario,
+        prefill: persona,
+      });
+      calendarioAbierto = true;
+    } catch {
+      location.href = CALENDLY_URL; // sin calendario embebido, va a Calendly en la misma pestaña
+    }
+  });
 
   const mostrarResultado = (nombre, don) => {
     const r = screens.result;

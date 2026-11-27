@@ -166,4 +166,8 @@
   .quiz__option:hover { transform: none; }
   .mc-card .btn--big { animation: none; }
 }
+/* Calendario de Calendly dentro del resultado */
+.quiz__calendario { margin-top: 2rem; scroll-margin-top: 5rem; }
+.quiz__calendario:focus { outline: none; }
+
 .quiz button.btn { border: 0; font-family: inherit; cursor: pointer; }
